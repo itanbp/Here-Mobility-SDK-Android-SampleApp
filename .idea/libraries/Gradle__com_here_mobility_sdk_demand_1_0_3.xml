@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.here.mobility.sdk:demand-1.0.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/demand-1.0.3.aar/ad19f139c7f892f855d9b6f32d80880b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/demand-1.0.3.aar/ad19f139c7f892f855d9b6f32d80880b/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
