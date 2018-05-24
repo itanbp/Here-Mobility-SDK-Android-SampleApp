@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp;
+package com.nil.test.sdk.sampleapp;
 
 import android.support.multidex.MultiDexApplication;
 

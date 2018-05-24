@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.get_rides;
+package com.nil.test.sdk.sampleapp.get_rides;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -51,12 +51,12 @@ import com.here.mobility.sdk.map.route.RouteRequest;
 import com.here.mobility.sdk.map.route.RouteResponse;
 import com.here.mobility.sdk.map.route.RoutingClient;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.geocoding.AutoCompleteActivity;
-import com.here.mobility.sdk.sampleapp.registration.RegistrationDialog;
-import com.here.mobility.sdk.sampleapp.ride_offers.RideOffersActivity;
-import com.here.mobility.sdk.sampleapp.rides.ActiveRidesActivity;
-import com.here.mobility.sdk.sampleapp.util.AuthUtils;
-import com.here.mobility.sdk.sampleapp.util.Constant;
+import com.nil.test.sdk.sampleapp.geocoding.AutoCompleteActivity;
+import com.nil.test.sdk.sampleapp.registration.RegistrationDialog;
+import com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity;
+import com.nil.test.sdk.sampleapp.rides.ActiveRidesActivity;
+import com.nil.test.sdk.sampleapp.util.AuthUtils;
+import com.nil.test.sdk.sampleapp.util.Constant;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.rides;
+package com.nil.test.sdk.sampleapp.rides;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.common.collect.Lists;
 import com.here.mobility.sdk.demand.PriceEstimate;
 import com.here.mobility.sdk.demand.Ride;
-import com.here.mobility.sdk.demand.RideStatusLog;
 import com.here.mobility.sdk.sampleapp.R;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;

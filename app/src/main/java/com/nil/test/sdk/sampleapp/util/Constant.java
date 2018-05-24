@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.util;
+package com.nil.test.sdk.sampleapp.util;
 
 import com.here.mobility.sdk.core.geo.LatLng;
 

@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.registration;
+package com.nil.test.sdk.sampleapp.registration;
 
 
 import android.content.Context;

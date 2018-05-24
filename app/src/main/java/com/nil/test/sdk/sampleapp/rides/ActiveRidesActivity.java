@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.rides;
+package com.nil.test.sdk.sampleapp.rides;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.here.mobility.sdk.demand.Ride;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.ride_status.RideStatusActivity;
+import com.nil.test.sdk.sampleapp.ride_status.RideStatusActivity;
 
 import java.util.ArrayList;
 import java.util.List;

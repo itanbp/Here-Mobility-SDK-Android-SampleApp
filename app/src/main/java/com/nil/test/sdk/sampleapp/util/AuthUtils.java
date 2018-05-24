@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.util;
+package com.nil.test.sdk.sampleapp.util;
 
 import android.support.annotation.NonNull;
 import android.util.Base64;

@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.ride_offers;
+package com.nil.test.sdk.sampleapp.ride_offers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;

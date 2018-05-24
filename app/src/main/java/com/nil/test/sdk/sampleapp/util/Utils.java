@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.util;
+package com.nil.test.sdk.sampleapp.util;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;

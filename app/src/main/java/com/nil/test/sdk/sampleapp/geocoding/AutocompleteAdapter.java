@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.geocoding;
+package com.nil.test.sdk.sampleapp.geocoding;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

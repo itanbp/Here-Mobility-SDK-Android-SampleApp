@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.get_rides;
+package com.nil.test.sdk.sampleapp.get_rides;
 
 
 import android.app.Activity;
@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.here.mobility.sdk.demand.BookingConstraints;
 import com.here.mobility.sdk.demand.PassengerDetails;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.widget.CounterView;
+import com.nil.test.sdk.sampleapp.widget.CounterView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.ride_status;
+package com.nil.test.sdk.sampleapp.ride_status;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +28,7 @@ import com.here.mobility.sdk.demand.RideLocation;
 import com.here.mobility.sdk.demand.RideStatusLog;
 import com.here.mobility.sdk.demand.Supplier;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.util.Utils;
+import com.nil.test.sdk.sampleapp.util.Utils;
 
 
 import java.util.Locale;

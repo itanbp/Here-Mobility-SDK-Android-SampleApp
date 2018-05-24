@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.ride_status;
+package com.nil.test.sdk.sampleapp.ride_status;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;

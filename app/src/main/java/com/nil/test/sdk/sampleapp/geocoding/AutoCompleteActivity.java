@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.geocoding;
+package com.nil.test.sdk.sampleapp.geocoding;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,7 +32,7 @@ import com.here.mobility.sdk.map.geocoding.GeocodingRequest;
 import com.here.mobility.sdk.map.geocoding.GeocodingResponse;
 import com.here.mobility.sdk.map.geocoding.GeocodingResult;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.util.Constant;
+import com.nil.test.sdk.sampleapp.util.Constant;
 
 import java.util.Collections;
 import java.util.EnumSet;

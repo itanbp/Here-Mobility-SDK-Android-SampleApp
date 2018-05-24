@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.widget;
+package com.nil.test.sdk.sampleapp.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

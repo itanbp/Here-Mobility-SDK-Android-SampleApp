@@ -1,4 +1,4 @@
-package com.here.mobility.sdk.sampleapp.public_transport;
+package com.nil.test.sdk.sampleapp.public_transport;
 
 import android.content.Context;
 import android.content.Intent;

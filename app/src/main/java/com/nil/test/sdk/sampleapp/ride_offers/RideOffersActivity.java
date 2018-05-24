@@ -1,9 +1,8 @@
-package com.here.mobility.sdk.sampleapp.ride_offers;
+package com.nil.test.sdk.sampleapp.ride_offers;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -26,8 +25,8 @@ import com.here.mobility.sdk.demand.RideOffer;
 import com.here.mobility.sdk.demand.RideOffersRequest;
 import com.here.mobility.sdk.demand.TaxiRideOffer;
 import com.here.mobility.sdk.sampleapp.R;
-import com.here.mobility.sdk.sampleapp.public_transport.PublicTransportActivity;
-import com.here.mobility.sdk.sampleapp.ride_status.RideStatusActivity;
+import com.nil.test.sdk.sampleapp.public_transport.PublicTransportActivity;
+import com.nil.test.sdk.sampleapp.ride_status.RideStatusActivity;
 
 
 import java.util.ArrayList;

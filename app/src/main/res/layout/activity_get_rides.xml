@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".get_rides.GetRidesActivity">
+    tools:context="com.nil.test.sdk.sampleapp.get_rides.GetRidesActivity">
 
         <fragment
             android:id="@+id/map_fragment"
