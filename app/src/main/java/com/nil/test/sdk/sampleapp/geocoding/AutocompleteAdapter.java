@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.here.mobility.sdk.map.geocoding.GeocodingResult;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 
 import java.util.Collections;
 import java.util.List;

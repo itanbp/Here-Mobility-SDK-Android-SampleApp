@@ -24,7 +24,7 @@ import com.here.mobility.sdk.demand.Ride;
 import com.here.mobility.sdk.demand.RideOffer;
 import com.here.mobility.sdk.demand.RideOffersRequest;
 import com.here.mobility.sdk.demand.TaxiRideOffer;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.public_transport.PublicTransportActivity;
 import com.nil.test.sdk.sampleapp.ride_status.RideStatusActivity;
 

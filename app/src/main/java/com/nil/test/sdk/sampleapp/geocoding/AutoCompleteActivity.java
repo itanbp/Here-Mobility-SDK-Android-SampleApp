@@ -31,7 +31,7 @@ import com.here.mobility.sdk.map.geocoding.GeocodingClient;
 import com.here.mobility.sdk.map.geocoding.GeocodingRequest;
 import com.here.mobility.sdk.map.geocoding.GeocodingResponse;
 import com.here.mobility.sdk.map.geocoding.GeocodingResult;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.util.Constant;
 
 import java.util.Collections;

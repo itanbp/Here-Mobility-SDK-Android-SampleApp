@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 
 
 /**********************************************************

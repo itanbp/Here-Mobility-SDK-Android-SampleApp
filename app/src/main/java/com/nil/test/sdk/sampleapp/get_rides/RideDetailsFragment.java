@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 import com.here.mobility.sdk.demand.BookingConstraints;
 import com.here.mobility.sdk.demand.PassengerDetails;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.widget.CounterView;
 
 import java.text.SimpleDateFormat;

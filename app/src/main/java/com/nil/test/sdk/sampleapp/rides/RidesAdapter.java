@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.here.mobility.sdk.demand.PriceEstimate;
 import com.here.mobility.sdk.demand.Ride;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
+
 
 import java.util.Collections;
 import java.util.List;

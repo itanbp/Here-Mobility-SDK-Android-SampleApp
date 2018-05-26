@@ -50,7 +50,7 @@ import com.here.mobility.sdk.map.route.Route;
 import com.here.mobility.sdk.map.route.RouteRequest;
 import com.here.mobility.sdk.map.route.RouteResponse;
 import com.here.mobility.sdk.map.route.RoutingClient;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.geocoding.AutoCompleteActivity;
 import com.nil.test.sdk.sampleapp.registration.RegistrationDialog;
 import com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity;

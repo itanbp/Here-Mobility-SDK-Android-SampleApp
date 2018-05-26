@@ -14,7 +14,7 @@ import com.here.mobility.sdk.demand.PriceEstimate;
 import com.here.mobility.sdk.demand.PublicTransportRideOffer;
 import com.here.mobility.sdk.demand.RideOffer;
 import com.here.mobility.sdk.demand.TaxiRideOffer;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 
 import java.util.Collections;
 import java.util.List;

@@ -13,7 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.here.mobility.sdk.demand.Ride;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.ride_status.RideStatusActivity;
 
 import java.util.ArrayList;

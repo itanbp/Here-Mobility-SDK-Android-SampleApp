@@ -27,7 +27,7 @@ import com.here.mobility.sdk.demand.Ride;
 import com.here.mobility.sdk.demand.RideLocation;
 import com.here.mobility.sdk.demand.RideStatusLog;
 import com.here.mobility.sdk.demand.Supplier;
-import com.here.mobility.sdk.sampleapp.R;
+import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.util.Utils;
 
 
