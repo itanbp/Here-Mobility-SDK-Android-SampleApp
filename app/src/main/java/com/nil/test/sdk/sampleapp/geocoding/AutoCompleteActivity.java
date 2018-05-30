@@ -225,7 +225,7 @@ public class AutoCompleteActivity extends AppCompatActivity {
         String languageCode = Locale.getDefault().getISO3Language();
 
         //The result type can be - ADDRESS:     and or PLACE:
-        Set<GeocodingResult.Type> resultTypes = EnumSet.of(GeocodingResult.Type.ADDRESS);
+        Set<GeocodingResult.Type> resultTypes = EnumSet.of(GeocodingResult.Type.PLACE);
 
         //Create forward geocoding request.
         GeocodingRequest geocodingRequest = GeocodingRequest.newForwardRequest(
