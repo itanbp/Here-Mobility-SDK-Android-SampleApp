@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.here.mobility.sdk.common.util.PermissionUtils;
@@ -42,10 +44,16 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
     private MapController mapController;
 
 
+    private RecyclerView.Adapter galleryAdapter;
+    private RecyclerView galleryRecycler;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        galleryRecycler = (RecyclerView) findViewById(R.id.home_concerts_gallery);
 
         initViews();
     }
@@ -58,6 +66,15 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
         if (mapFragment != null) {
             mapFragment.loadMapAsync(this);
         }
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        galleryRecycler.setHasFixedSize(true);
+        galleryRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
+        galleryRecycler.setLayoutManager(layoutManager);
+
+        galleryAdapter = new ConcertsAdapter();
+        galleryRecycler.setAdapter(galleryAdapter);
 
     }
 

@@ -17,10 +17,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toTopOf="@+id/home_bottom_bar"/>
 
 
     <View
+        android:id="@+id/home_bottom_bar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:background="@color/purple"
@@ -74,6 +75,16 @@
         app:layout_constraintStart_toEndOf="@+id/home_my_trips"
         app:layout_constraintEnd_toEndOf="parent"
         android:alpha="0.7"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_concerts_gallery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/home_bottom_bar"
+        android:layout_margin="@dimen/views_margin" />
 
 
 </android.support.constraint.ConstraintLayout>
