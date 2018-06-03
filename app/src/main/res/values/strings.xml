@@ -42,5 +42,11 @@
     <string name="register_not_valid_user_name">User name is mandatory for registration</string>
     <string name="enter_user_name">Enter user name</string>
 
+    <string name="home_discover">Discover</string>
+    <string name="home_my_trips">My Trips</string>
+    <string name="home_account">Account</string>
+    <string name="home_title">London</string>
+
+
 
 </resources>

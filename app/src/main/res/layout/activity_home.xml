@@ -19,6 +19,61 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <TextView
+        android:id="@+id/home_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_search"
+        android:text="@string/home_discover"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/home_my_trips"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+
+    <TextView
+        android:id="@+id/home_my_trips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_tickets"
+        android:text="@string/home_my_trips"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_search"
+        app:layout_constraintStart_toEndOf="@+id/home_search"
+        app:layout_constraintEnd_toStartOf="@+id/home_my_account"
+        android:alpha="0.7"
+        />
+
+
+    <TextView
+        android:id="@+id/home_my_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_myaccount"
+        android:text="@string/home_account"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_search"
+        app:layout_constraintStart_toEndOf="@+id/home_my_trips"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:alpha="0.7"/>
+
 
 </android.support.constraint.ConstraintLayout>
