@@ -32,7 +32,9 @@
             android:name="HERE_SDK_APP_SECRET"
             android:value="@string/here_sdk_app_secret" />
 
-        <activity android:name=".happy_ride.HomeActivity">
+        <activity
+            android:name=".happy_ride.HomeActivity"
+            android:theme="@style/HappyRideTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

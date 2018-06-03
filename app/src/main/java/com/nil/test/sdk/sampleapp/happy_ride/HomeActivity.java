@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.here.mobility.sdk.common.util.PermissionUtils;
@@ -20,7 +21,7 @@ import com.nil.test.sdk.sampleapp.get_rides.GetRidesActivity;
 import com.nil.test.sdk.sampleapp.util.Constant;
 
 
-public class HomeActivity extends AppCompatActivity implements MapView.MapReadyListener {
+public class HomeActivity extends BaseActivity implements MapView.MapReadyListener {
 
 
     @NonNull
@@ -51,13 +52,16 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
 
         galleryRecycler = (RecyclerView) findViewById(R.id.home_concerts_gallery);
 
         initViews();
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_home;
+    }
 
     private void initViews() {
 
