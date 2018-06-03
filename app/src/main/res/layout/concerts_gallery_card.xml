@@ -12,36 +12,58 @@
 
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/gallery_card_image"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
             card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:background="@color/purple"/>
+            android:src="@drawable/pic_beynonce"/>
 
 
+        <TextView
+            android:id="@+id/gallery_card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#4b4b4b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="6sp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/gallery_card_image"
+            android:layout_marginTop="@dimen/views_margin_very_small"
+            android:layout_marginStart="@dimen/views_margin_small"
+            tools:text="Beyonce &amp; Jay.Z"/>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/gallery_card_image"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="120dp"-->
-            <!--card_view:layout_constraintStart_toStartOf="parent"-->
-            <!--card_view:layout_constraintEnd_toEndOf="parent"-->
-            <!--card_view:layout_constraintTop_toTopOf="parent"-->
-            <!--android:src="@drawable/pic_beynonce"/>-->
+
+        <TextView
+            android:id="@+id/gallery_card_arena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#757575"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="4sp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/gallery_card_title"
+            android:layout_marginTop="@dimen/views_margin_very_small"
+            android:layout_marginStart="@dimen/views_margin_small"
+            tools:text="London Stadium, London"/>
 
 
-        <!--<TextView-->
-            <!--android:id="@+id/gallery_card_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textSize="18sp"-->
-            <!--android:textColor="#4b4b4b"-->
-            <!--android:lineSpacingExtra="6sp"-->
-            <!--card_view:layout_constraintStart_toStartOf="parent"-->
-            <!--card_view:layout_constraintTop_toBottomOf="@+id/gallery_card_image"-->
-            <!--android:layout_margin="@dimen/views_margin_small"-->
-            <!--android:text="TEST"/>-->
-
+        <TextView
+            android:id="@+id/gallery_card_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="6sp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/views_margin_small"
+            android:layout_marginBottom="@dimen/views_margin"
+            tools:text="June 15-16, 2018  |  18:00"/>
 
     </android.support.constraint.ConstraintLayout>
 

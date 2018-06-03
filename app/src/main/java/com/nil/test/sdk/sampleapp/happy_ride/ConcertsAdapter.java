@@ -23,24 +23,20 @@ public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHo
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView objectTitle;
-        ImageView objectImage;
-        ImageView bookmarkButton;
-        ImageView editButton;
+        ImageView image;
+        TextView title;
+        TextView arena;
+        TextView date;
 
         ViewHolder(View view) {
             super(view);
 
-            /*
-            objectTitle = view.findViewById(R.id.virtual_object_title);
-            objectImage = view.findViewById(R.id.virtual_object_image);
-            bookmarkButton = view.findViewById(R.id.virtual_object_bookmark);
-            editButton = view.findViewById(R.id.virtual_object_edit);
+            image = view.findViewById(R.id.gallery_card_image);
+            title = view.findViewById(R.id.gallery_card_title);
+            arena = view.findViewById(R.id.gallery_card_arena);
+            date = view.findViewById(R.id.gallery_card_date);
 
-            objectImage.setOnClickListener(listener);
-            bookmarkButton.setOnClickListener(listener);
-            editButton.setOnClickListener(listener);
-            */
+            view.setOnClickListener(listener);
         }
     }
 
@@ -66,13 +62,13 @@ public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHo
 
         Concert concert = concertsList.get(position);
 
-         /*
-        Context context = holder.objectImage.getContext();
+        Context context = holder.image.getContext();
 
+        holder.image.setImageDrawable(context.getDrawable(concert.drawableId));
+        holder.title.setText(concert.title);
+        holder.arena.setText(concert.arena);
+        holder.date.setText(concert.date);
 
-        holder.objectImage.setImageDrawable(context.getDrawable(virtualObject.image));
-        holder.objectTitle.setText(virtualObject.name);
-        */
 
     }
 
@@ -96,9 +92,18 @@ public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHo
 
 
     private ArrayList<Concert> getMockData() {
+
         ArrayList<Concert> concerts = new ArrayList<>();
-        Concert concert = new Concert("Beyonce &amp; Jay.Z", "London Stadium, London", "June 15-16, 2018  |  18:00", R.drawable.pic_beynonce);
+
+        Concert concert = new Concert("Beyonce & Jay.Z", "London Stadium, London", "June 15-16, 2018  |  18:00", R.drawable.pic_beynonce);
         concerts.add(concert);
+
+        concert = new Concert("Ed Sheeran", "London Stadium, London", "June 14-17, 2018  |  18:00", R.drawable.pic_ed);
+        concerts.add(concert);
+
+        concert = new Concert("Kanye West", "O2 Arena, London", "June 18-20, 2018 | 17:00", R.drawable.pic_kanye);
+        concerts.add(concert);
+
         return concerts;
     }
 
