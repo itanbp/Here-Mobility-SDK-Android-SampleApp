@@ -1,5 +1,7 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.here.mobility.sdk.common.util.PermissionUtils;
+import com.here.mobility.sdk.map.FusedUserLocationSource;
 import com.here.mobility.sdk.map.MapController;
 import com.here.mobility.sdk.map.MapFragment;
 import com.here.mobility.sdk.map.MapView;
@@ -20,6 +23,23 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
 
     @NonNull
     private static final String LOG_TAG = GetRidesActivity.class.getSimpleName();
+
+    /**
+     * Location permission code.
+     */
+    private static final int LOCATION_PERMISSIONS_CODE = 42;
+
+
+    /**
+     * MapController zoom level.
+     */
+    private static final float MAP_ZOOM = 14.5f;
+
+
+    /**
+     * Used to interact with the map.
+     */
+    private MapController mapController;
 
 
     @Override
@@ -50,7 +70,6 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
     @Override
     public void onMapReady(@NonNull MapController mapController) {
 
-        /*
         this.mapController = mapController;
         //Set the map center position.
         mapController.setPosition(Constant.CENTER_OF_LONDON);
@@ -62,8 +81,6 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
         } else {
             startLocationUpdates();
         }
-        */
-
     }
 
 
@@ -72,6 +89,26 @@ public class HomeActivity extends AppCompatActivity implements MapView.MapReadyL
         Log.e(LOG_TAG, "onMapFailure: ", e);
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        if (requestCode == LOCATION_PERMISSIONS_CODE){
+            if ((grantResults.length > 0) && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                startLocationUpdates();
+            }
+        }
+    }
+
+
+    /**
+     * Start user location updates.
+     */
+    @SuppressLint("MissingPermission")
+    private void startLocationUpdates(){
+
+        mapController.getUserLocationMarkerManager().setLocationSource(new FusedUserLocationSource(this));
+
+    }
 
 
 }
