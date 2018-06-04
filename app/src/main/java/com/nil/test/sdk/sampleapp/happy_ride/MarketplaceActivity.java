@@ -1,19 +1,23 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.google.common.collect.Lists;
+import com.here.mobility.sdk.demand.RideOffer;
 import com.here.mobility.sdk.map.MapFragment;
 import com.nil.test.sdk.sampleapp.R;
+
+import java.util.ArrayList;
 
 public class MarketplaceActivity extends BaseActivity {
 
 
     private RecyclerView.Adapter offersAdapter;
     private RecyclerView offersRecycler;
-
 
 
     @Override
@@ -24,7 +28,6 @@ public class MarketplaceActivity extends BaseActivity {
 
         initViews();
     }
-
 
 
     @Override
@@ -40,9 +43,38 @@ public class MarketplaceActivity extends BaseActivity {
         offersRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
         offersRecycler.setLayoutManager(layoutManager);
 
-        offersAdapter = new HappyRideOffersAdapter(null);
+        //Received ride offers list from Intent.extra and update the list.
+        ArrayList<RideOffer> rideOffers = getRideOffers();
+
+
+        offersAdapter = new HappyRideOffersAdapter(null, rideOffers);
         offersRecycler.setAdapter(offersAdapter);
 
+    }
+
+
+    /**
+     * Getter. Extra list of ride offers
+     *
+     * @return list of ride offers
+     * @throws RuntimeException In case RideOffer list is empty or null.
+     */
+    @NonNull
+    private ArrayList<RideOffer> getRideOffers() {
+
+        ArrayList<RideOffer> rideOffers = Lists.newArrayList();
+
+        /*
+        if (getIntent().hasExtra(EXTRA_TAXI_RIDE_OFFER_LIST)) {
+            rideOffers.addAll(getIntent().getParcelableArrayListExtra(EXTRA_TAXI_RIDE_OFFER_LIST));
+        }
+        if (getIntent().hasExtra(EXTRA_PT_RIDE_OFFER_LIST)) {
+            rideOffers.addAll(getIntent().getParcelableArrayListExtra(EXTRA_PT_RIDE_OFFER_LIST));
+        }
+        */
+
+
+        return rideOffers;
     }
 
 

@@ -16,6 +16,7 @@ import com.here.mobility.sdk.demand.RideOffer;
 import com.here.mobility.sdk.demand.TaxiRideOffer;
 import com.nil.test.sdk.sampleapp.R;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -35,6 +36,7 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
 
         /**
          * Callback method, notify when ride offer item selected.
+         *
          * @param offer selected {@link RideOffer}.
          */
         void offerItemSelected(@NonNull RideOffer offer);
@@ -45,7 +47,7 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
      * RideOffer list data source.
      */
     @NonNull
-    private List<RideOffer> dataSource = Collections.emptyList();
+    private List<RideOffer> dataSource;
 
 
     /**
@@ -55,16 +57,16 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
     private RideOffersListener listener;
 
 
-    HappyRideOffersAdapter(@NonNull RideOffersListener listener) {
+    HappyRideOffersAdapter(@NonNull RideOffersListener listener, ArrayList<RideOffer> rideOffers) {
         this.listener = listener;
+        dataSource = rideOffers;
     }
 
 
     @NonNull
     @Override
     public RideOfferItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.ride_offer_list_item, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.happy_ride_offer_list_item, parent, false);
         return new HappyRideOffersAdapter.RideOfferItem(itemView);
     }
 
@@ -91,26 +93,27 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
 
     /**
      * Bind taxi offer to cell.
+     *
      * @param offer the taxi offer
      */
-    private void bindTaxiOffer(@NonNull TaxiRideOffer offer, @NonNull RideOfferItem holder){
+    private void bindTaxiOffer(@NonNull TaxiRideOffer offer, @NonNull RideOfferItem holder) {
         holder.supplierName.setText(offer.getSupplier().getEnglishName());
         PriceEstimate price = offer.getEstimatedPrice();
 
         //Price can be fixed or range of prices.
         if (price != null) {
             //The best practice to show price is by calling toPlainString()
-            if(price.isFixedPrice()){
+            if (price.isFixedPrice()) {
                 holder.estimatedPrice.setText(
-                        String.format(Locale.getDefault(),"%s %s"
-                                ,price.getFixedPrice().getAmount().toPlainString()
-                                ,price.getFixedPrice().getCurrencyCode()));
-            }else if (price.isRange()){
+                        String.format(Locale.getDefault(), "%s %s"
+                                , price.getFixedPrice().getAmount().toPlainString()
+                                , price.getFixedPrice().getCurrencyCode()));
+            } else if (price.isRange()) {
                 holder.estimatedPrice.setText(
-                        String.format(Locale.getDefault(),"%s - %s %s"
-                                ,price.getPriceRange().getLowerBound().toPlainString()
-                                ,price.getPriceRange().getUpperBound().toPlainString()
-                                ,price.getPriceRange().getCurrencyCode()));
+                        String.format(Locale.getDefault(), "%s - %s %s"
+                                , price.getPriceRange().getLowerBound().toPlainString()
+                                , price.getPriceRange().getUpperBound().toPlainString()
+                                , price.getPriceRange().getCurrencyCode()));
             }
         }
 
@@ -118,7 +121,7 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
         if (etaTimestamp != null) {
             String time = DateUtils.formatDateTime(holder.itemView.getContext(), etaTimestamp, DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR);
             holder.eta.setText(time);
-        }else{
+        } else {
             holder.eta.setText(R.string.not_available_initial);
         }
     }
@@ -126,9 +129,10 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
 
     /**
      * Bind public transport offer to cell.
+     *
      * @param offer the public transport offer
      */
-    public void bindPublicTransportOffer(@NonNull PublicTransportRideOffer offer, @NonNull RideOfferItem holder){
+    public void bindPublicTransportOffer(@NonNull PublicTransportRideOffer offer, @NonNull RideOfferItem holder) {
 
         holder.actionButton.setText(R.string.public_transport_details);
         holder.supplierName.setText(R.string.public_transport);
@@ -138,17 +142,17 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
         //Price can be fixed or range of prices.
         if (price != null) {
             //The best practice to show price is by calling toPlainString()
-            if(price.isFixedPrice()){
+            if (price.isFixedPrice()) {
                 holder.estimatedPrice.setText(
-                        String.format(Locale.getDefault(),"%s %s"
-                                ,price.getFixedPrice().getAmount().toPlainString()
-                                ,price.getFixedPrice().getCurrencyCode()));
-            }else if (price.isRange()){
+                        String.format(Locale.getDefault(), "%s %s"
+                                , price.getFixedPrice().getAmount().toPlainString()
+                                , price.getFixedPrice().getCurrencyCode()));
+            } else if (price.isRange()) {
                 holder.estimatedPrice.setText(
-                        String.format(Locale.getDefault(),"%s - %s %s"
-                                ,price.getPriceRange().getLowerBound().toPlainString()
-                                ,price.getPriceRange().getUpperBound().toPlainString()
-                                ,price.getPriceRange().getCurrencyCode()));
+                        String.format(Locale.getDefault(), "%s - %s %s"
+                                , price.getPriceRange().getLowerBound().toPlainString()
+                                , price.getPriceRange().getUpperBound().toPlainString()
+                                , price.getPriceRange().getCurrencyCode()));
             }
         }
 
@@ -156,7 +160,7 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
         if (etaTimestamp != null) {
             String time = DateUtils.formatDateTime(holder.itemView.getContext(), etaTimestamp, DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_24HOUR);
             holder.eta.setText(time);
-        }else{
+        } else {
             holder.eta.setText(R.string.not_available_initial);
         }
 
@@ -166,17 +170,6 @@ public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffers
     @Override
     public int getItemCount() {
         return dataSource.size();
-    }
-
-
-    /**
-     * Update ride offer list items.
-     * @param dataSource RideOffer array.
-     */
-    @UiThread
-    public void updateDataSource(@NonNull List<RideOffer> dataSource) {
-        this.dataSource = dataSource;
-        this.notifyDataSetChanged();
     }
 
 
