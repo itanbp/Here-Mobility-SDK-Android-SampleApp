@@ -46,7 +46,7 @@ public class AutocompleteAdapter extends  RecyclerView.Adapter<AutocompleteAdapt
     private AutoCompleteItemClicked listener;
 
 
-    AutocompleteAdapter(@NonNull AutoCompleteItemClicked adapterListener) {
+    public AutocompleteAdapter(@NonNull AutoCompleteItemClicked adapterListener) {
         this.listener = adapterListener;
     }
 

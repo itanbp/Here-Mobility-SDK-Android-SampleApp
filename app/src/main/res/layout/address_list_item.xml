@@ -17,7 +17,7 @@
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:drawablePadding="2dp"
-      android:drawableTop="@drawable/pin"
+      android:drawableTop="@drawable/ic_location"
       tools:text="12km"
       />
 
