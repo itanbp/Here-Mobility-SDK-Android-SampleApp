@@ -11,6 +11,9 @@ import com.nil.test.sdk.sampleapp.R;
 
 import java.util.ArrayList;
 
+import static com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity.EXTRA_PT_RIDE_OFFER_LIST;
+import static com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity.EXTRA_TAXI_RIDE_OFFER_LIST;
+
 public class MarketplaceActivity extends BaseActivity {
 
 
@@ -42,9 +45,9 @@ public class MarketplaceActivity extends BaseActivity {
 
     private void initViews() {
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         offersRecycler.setHasFixedSize(true);
-        offersRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
+        offersRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider), RecyclerView.VERTICAL));
         offersRecycler.setLayoutManager(layoutManager);
 
         //Received ride offers list from Intent.extra and update the list.
@@ -68,15 +71,12 @@ public class MarketplaceActivity extends BaseActivity {
 
         ArrayList<RideOffer> rideOffers = Lists.newArrayList();
 
-        /*
         if (getIntent().hasExtra(EXTRA_TAXI_RIDE_OFFER_LIST)) {
             rideOffers.addAll(getIntent().getParcelableArrayListExtra(EXTRA_TAXI_RIDE_OFFER_LIST));
         }
         if (getIntent().hasExtra(EXTRA_PT_RIDE_OFFER_LIST)) {
             rideOffers.addAll(getIntent().getParcelableArrayListExtra(EXTRA_PT_RIDE_OFFER_LIST));
         }
-        */
-
 
         return rideOffers;
     }

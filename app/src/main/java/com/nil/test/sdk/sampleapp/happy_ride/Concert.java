@@ -3,6 +3,8 @@ package com.nil.test.sdk.sampleapp.happy_ride;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.here.mobility.sdk.core.geo.LatLng;
+
 import java.util.ArrayList;
 
 /**
@@ -15,14 +17,16 @@ public class Concert implements Parcelable {
     String date;
     int drawableId;
     ArrayList<String> dates;
+    LatLng latLng;
 
 
-    public Concert(String title, String arena, String date, int drawableId, ArrayList<String> dates) {
+    public Concert(String title, String arena, String date, int drawableId, ArrayList<String> dates, LatLng latLng) {
         this.title = title;
         this.arena = arena;
         this.date = date;
         this.drawableId = drawableId;
         this.dates = dates;
+        this.latLng = latLng;
     }
 
 
@@ -46,6 +50,9 @@ public class Concert implements Parcelable {
         return dates;
     }
 
+    public LatLng getLatLng() {
+        return latLng;
+    }
 
     @Override
     public int describeContents() {
@@ -59,6 +66,7 @@ public class Concert implements Parcelable {
         dest.writeString(this.date);
         dest.writeInt(this.drawableId);
         dest.writeStringList(this.dates);
+        dest.writeParcelable(this.latLng, flags);
     }
 
     protected Concert(Parcel in) {
@@ -67,6 +75,7 @@ public class Concert implements Parcelable {
         this.date = in.readString();
         this.drawableId = in.readInt();
         this.dates = in.createStringArrayList();
+        this.latLng = in.readParcelable(LatLng.class.getClassLoader());
     }
 
     public static final Creator<Concert> CREATOR = new Creator<Concert>() {

@@ -25,11 +25,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.common.collect.Lists;
 import com.here.mobility.sdk.common.util.Cancelable;
 import com.here.mobility.sdk.core.geo.LatLng;
 import com.here.mobility.sdk.core.net.ResponseException;
 import com.here.mobility.sdk.core.net.ResponseFuture;
 import com.here.mobility.sdk.core.net.ResponseListener;
+import com.here.mobility.sdk.demand.BookingConstraints;
+import com.here.mobility.sdk.demand.DemandClient;
+import com.here.mobility.sdk.demand.PassengerDetails;
+import com.here.mobility.sdk.demand.PublicTransportRideOffer;
+import com.here.mobility.sdk.demand.RideOffer;
+import com.here.mobility.sdk.demand.RideOffersRequest;
+import com.here.mobility.sdk.demand.RideWaypoints;
+import com.here.mobility.sdk.demand.TaxiRideOffer;
 import com.here.mobility.sdk.map.geocoding.GeocodingClient;
 import com.here.mobility.sdk.map.geocoding.GeocodingRequest;
 import com.here.mobility.sdk.map.geocoding.GeocodingResponse;
@@ -37,6 +46,8 @@ import com.here.mobility.sdk.map.geocoding.GeocodingResult;
 import com.nil.test.sdk.sampleapp.R;
 import com.nil.test.sdk.sampleapp.geocoding.AutoCompleteActivity;
 import com.nil.test.sdk.sampleapp.geocoding.AutocompleteAdapter;
+import com.nil.test.sdk.sampleapp.get_rides.GetRidesActivity;
+import com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity;
 import com.nil.test.sdk.sampleapp.util.Constant;
 
 import java.text.SimpleDateFormat;
@@ -53,9 +64,10 @@ import moe.feng.common.stepperview.VerticalStepperItemView;
 import moe.feng.common.stepperview.VerticalStepperView;
 
 import static com.nil.test.sdk.sampleapp.happy_ride.HomeActivity.CONCERT_KEY;
+import static com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity.EXTRA_PT_RIDE_OFFER_LIST;
+import static com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity.EXTRA_TAXI_RIDE_OFFER_LIST;
 
 public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
-
 
 
     private Concert concert;
@@ -93,6 +105,11 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     @Nullable
     private Long preBookTime = null;
 
+    /**
+     * Use DemandClient to request ride offers.
+     */
+    private DemandClient demandClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +128,11 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
         orderRideButton = (Button) findViewById(R.id.order_ride_button);
 
         autocompleteClient = new GeocodingClient(this);
+        demandClient = DemandClient.newInstance(this);
+
+        orderRideButton.setOnClickListener(v -> {
+            requestRideOffers();
+        });
 
     }
 
@@ -150,7 +172,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
                 break;
 
             case 4:
-                title = "Who is riding along with you?";
+                title = "Who is coming with you?";
                 break;
 
             default:
@@ -304,6 +326,11 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
         //It's important to call shutdown function when the client is no longer needed.
         if (autocompleteClient != null) {
             autocompleteClient.shutdownNow();
+        }
+
+        //It's important to call shutdownNow function when the client is no longer needed.
+        if (demandClient != null) {
+            demandClient.shutdownNow();
         }
     }
 
@@ -489,14 +516,15 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
     /**
      * Booking item clicked.
+     *
      * @param clickedItem anchor view to show PopupMenu.
      */
-    public void bookNowItemClicked(@NonNull View clickedItem){
+    public void bookNowItemClicked(@NonNull View clickedItem) {
         PopupMenu menu = new PopupMenu(this, clickedItem);
         menu.inflate(R.menu.booking_menu);
         menu.setOnMenuItemClickListener(item -> {
 
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.booking_leave_now:
                     setLeaveTimeToNow();
                     break;
@@ -514,7 +542,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     /**
      * Set the leave time to leave now.
      */
-    private void setLeaveTimeToNow(){
+    private void setLeaveTimeToNow() {
         preBookTime = null;
         leaveTime.setText(R.string.leave_now);
     }
@@ -522,9 +550,10 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
     /**
      * Set leave time to later.
+     *
      * @param calendar a valid calendar.
      */
-    private void setLeaveTime(@NonNull Calendar calendar){
+    private void setLeaveTime(@NonNull Calendar calendar) {
         preBookTime = calendar.getTimeInMillis();
         SimpleDateFormat simple = new SimpleDateFormat("HH:mm", Locale.getDefault());
         simple.setTimeZone(calendar.getTimeZone());
@@ -535,22 +564,22 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     /**
      * Show TimePickerDialog.
      */
-    private void showTimePickerDialog(){
+    private void showTimePickerDialog() {
         Calendar calendar = Calendar.getInstance();
         //The minimum time for pre-book offers is NOW() + 30 minutes.
-        calendar.add(Calendar.MINUTE,30);
+        calendar.add(Calendar.MINUTE, 30);
 
-        TimePickerDialog picker = new TimePickerDialog(this, R.style.BookingDatePicker,(view, hourOfDay, minute) -> {
+        TimePickerDialog picker = new TimePickerDialog(this, R.style.BookingDatePicker, (view, hourOfDay, minute) -> {
             Calendar minimumTimeForPreBook = Calendar.getInstance();
-            minimumTimeForPreBook.add(Calendar.MINUTE,30);
+            minimumTimeForPreBook.add(Calendar.MINUTE, 30);
             Calendar pickerTime = Calendar.getInstance();
             pickerTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             pickerTime.set(Calendar.MINUTE, minute);
             //check if pickerTime is valid.
-            if (pickerTime.after(minimumTimeForPreBook)){
+            if (pickerTime.after(minimumTimeForPreBook)) {
                 setLeaveTime(pickerTime);
-            }else{
-                Toast.makeText(this,R.string.invalid_prebooking_time,Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, R.string.invalid_prebooking_time, Toast.LENGTH_LONG).show();
             }
 
         }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
@@ -558,4 +587,107 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
         picker.show();
     }
 
+
+    private void requestRideOffers() {
+
+        if (concert == null) {
+            return;
+        }
+
+        BookingConstraints constraints = BookingConstraints.create(1, 0);
+        RideWaypoints rideWayPoints = RideWaypoints.create(selectedLocation.getLocation(), concert.getLatLng());
+
+        requestRideOffers(rideWayPoints, constraints, "", preBookTime);
+    }
+
+    /**
+     * Ride offers request.
+     */
+    private void requestRideOffers(@NonNull RideWaypoints rideWaypoints,
+                                   @NonNull BookingConstraints constraints,
+                                   @Nullable String passengerNote,
+                                   @Nullable Long preBookTime) {
+
+        RideOffersRequest.Builder rideOfferBuilder = RideOffersRequest.builder()
+                .setConstraints(constraints)
+                .setRideWaypoints(rideWaypoints);
+
+        // set pre-book time, default is now.
+        if (preBookTime != null) {
+            rideOfferBuilder.setPrebookPickupTime(preBookTime);
+        }
+
+        // set passenger note
+        if (passengerNote != null) {
+            rideOfferBuilder.setPassengerNote(passengerNote);
+        }
+
+        RideOffersRequest rideOffersRequest = rideOfferBuilder.build();
+
+        // Request ride offers.
+        ResponseFuture<List<RideOffer>> offersFuture = demandClient.getRideOffers(rideOffersRequest);
+
+        // Register offers future listener.
+        offersFuture.registerListener(rideOffersFutureListener);
+
+    }
+
+    /**
+     * A callback method that received ride offers after {@link DemandClient#getRideOffers(RideOffersRequest)} request.
+     */
+    private ResponseListener<List<RideOffer>> rideOffersFutureListener = new ResponseListener<List<RideOffer>>() {
+        @Override
+        public void onResponse(@NonNull List<RideOffer> rideOffers) {
+            showRideOffersActivity(rideOffers);
+        }
+
+        @Override
+        public void onError(@NonNull ResponseException e) {
+        }
+    };
+
+
+    /**
+     * Start Ride offers activity.
+     *
+     * @param rideOffers list of ride offers.
+     */
+    private void showRideOffersActivity(List<RideOffer> rideOffers) {
+
+        if (rideOffers.size() > 0) {
+
+            ArrayList<TaxiRideOffer> taxiRideOffers = Lists.newArrayList();
+            ArrayList<PublicTransportRideOffer> ptRideOffers = Lists.newArrayList();
+
+            for (RideOffer offer : rideOffers) {
+                offer.accept(new RideOffer.Visitor<Void>() {
+                    @Override
+                    public Void visit(@NonNull TaxiRideOffer taxiRideOffer) {
+                        taxiRideOffers.add((TaxiRideOffer) offer);
+                        return null;
+                    }
+
+                    @Override
+                    public Void visit(@NonNull PublicTransportRideOffer publicTransportRideOffer) {
+                        ptRideOffers.add((PublicTransportRideOffer) offer);
+                        return null;
+                    }
+                });
+            }
+
+            PassengerDetails passengerDetails = PassengerDetails.builder()
+                    .setName("Lior")
+                    .setPhoneNumber("054")
+                    .build();
+
+            Intent intent = new Intent(this, MarketplaceActivity.class);
+            intent.putParcelableArrayListExtra(EXTRA_TAXI_RIDE_OFFER_LIST, taxiRideOffers);
+            intent.putParcelableArrayListExtra(EXTRA_PT_RIDE_OFFER_LIST, ptRideOffers);
+
+            startActivity(intent);
+
+        }
+    }
 }
+
+

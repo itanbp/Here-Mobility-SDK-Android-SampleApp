@@ -55,7 +55,7 @@
         <Button
             android:id="@+id/book_button"
             android:layout_width="80dp"
-            android:layout_height="32dp"
+            android:layout_height="48dp"
             android:textSize="14sp"
             android:textColor="#ffffff"
             android:letterSpacing="0.01"
