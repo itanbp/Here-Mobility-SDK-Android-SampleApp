@@ -10,9 +10,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -49,10 +51,15 @@ import static com.nil.test.sdk.sampleapp.happy_ride.HomeActivity.CONCERT_KEY;
 public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
 
-    private VerticalStepperView stepperView;
+
     private Concert concert;
+
+    private VerticalStepperView stepperView;
     private Button orderRideButton;
+    private EditText searchAddressEdit;
+
     private String concertSelectedDate;
+    private GeocodingResult selectedLocation;
 
     /**
      * Geocoding client is the channel for forward and reverse geocoding request.
@@ -159,7 +166,11 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
                 break;
 
             case 2:
-                summary = null;
+                if (selectedLocation != null) {
+                    summary = selectedLocation.getTitle();
+                } else {
+                    summary = null;
+                }
                 break;
 
             case 3:
@@ -218,20 +229,31 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
         Button okButton = inflateView.findViewById(R.id.button_next);
         Button cancelButton = inflateView.findViewById(R.id.button_prev);
 
-        okButton.setOnClickListener(v -> {
-            if (stepperView.canNext()) {
-                stepperView.nextStep();
-            } else if (stepperView.getCurrentStep() == 4) { // last step
-                orderRideButton.setTextColor(ContextCompat.getColor(this, R.color.white));
-                orderRideButton.setEnabled(true);
-            }
-        });
+        if (okButton != null) {
+            okButton.setOnClickListener(v -> {
+                if (stepperView.canNext()) {
+                    stepperView.nextStep();
+                } else if (stepperView.getCurrentStep() == 4) { // last step
+                    orderRideButton.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    orderRideButton.setEnabled(true);
+                }
+            });
+        }
 
-        cancelButton.setOnClickListener(v -> {
-            if (stepperView.canPrev()) {
-                stepperView.prevStep();
-            }
-        });
+
+        if (cancelButton != null) {
+            cancelButton.setOnClickListener(v -> {
+                if (stepperView.canPrev()) {
+                    stepperView.prevStep();
+                }
+            });
+        }
+
+        if (stepperView.getCurrentStep() == 2) {
+            orderRideButton.setVisibility(View.GONE);
+        } else {
+            orderRideButton.setVisibility(View.VISIBLE);
+        }
 
         return inflateView;
     }
@@ -296,7 +318,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
     private void setStep3(View view) {
 
-        EditText searchAddressEdit = view.findViewById(R.id.search_address_edit_text);
+        searchAddressEdit = view.findViewById(R.id.search_address_edit_text);
         searchAddressEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -306,7 +328,6 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 onSearchAddressTextChanged(s.toString());
             }
 
@@ -332,7 +353,16 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
      */
     @NonNull
     private AutocompleteAdapter.AutoCompleteItemClicked adapterListener = (int position, GeocodingResult selected) -> {
-        //resultIntent.putExtra(GEOCODING_RESULT, selected);
+
+        selectedLocation = selected;
+        stepperView.nextStep();
+
+        if (searchAddressEdit != null) { // hide keyboard
+            InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(searchAddressEdit.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
     };
 
 
