@@ -1,8 +1,8 @@
 <resources>
 
     <style name="HappyRideTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryDark">@color/status_bar</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="android:windowBackground">@color/background</item>-->
         <!--<item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>-->

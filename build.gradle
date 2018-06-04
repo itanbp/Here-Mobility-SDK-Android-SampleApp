@@ -22,6 +22,7 @@ allprojects {
         maven {
             url "https://mobility.bintray.com/sdk"
         }
+        maven { url 'https://jitpack.io' }
     }
 }
 

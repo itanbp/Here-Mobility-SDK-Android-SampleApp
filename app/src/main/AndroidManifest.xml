@@ -13,11 +13,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/HappyRideTheme">
         <activity
             android:name=".get_rides.GetRidesActivity"
             android:theme="@style/AppThemeNoTitle"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".geocoding.AutoCompleteActivity" />
         <activity android:name=".ride_offers.RideOffersActivity" />
         <activity android:name=".ride_status.RideStatusActivity" />
@@ -32,15 +32,17 @@
             android:value="@string/here_sdk_app_secret" />
 
         <activity
-            android:name=".happy_ride.HomeActivity"
-            android:theme="@style/HappyRideTheme">
+            android:name=".happy_ride.HomeActivity">
+        </activity>
+        <activity android:name=".happy_ride.MarketplaceActivity" />
+        <activity android:name=".happy_ride.OrderRideActivity" />
+        <activity android:name=".happy_ride.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".happy_ride.MarketplaceActivity"></activity>
     </application>
 
 </manifest>

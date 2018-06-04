@@ -1,14 +1,12 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.google.common.collect.Lists;
 import com.here.mobility.sdk.demand.RideOffer;
-import com.here.mobility.sdk.map.MapFragment;
 import com.nil.test.sdk.sampleapp.R;
 
 import java.util.ArrayList;
@@ -33,6 +31,12 @@ public class MarketplaceActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_marketplace;
+    }
+
+
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.status_bar;
     }
 
 
