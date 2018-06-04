@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <Button
         android:id="@+id/button_next"
@@ -12,7 +11,9 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/material_blue_500"
         android:textColor="@android:color/white"
-        android:text="@android:string/ok"/>
+        android:text="@android:string/ok"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
         android:id="@+id/button_prev"
@@ -21,8 +22,6 @@
         android:layout_marginStart="8dp"
         android:text="@android:string/cancel"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-
+        app:layout_constraintStart_toEndOf="@+id/button_next"/>
 
 </android.support.constraint.ConstraintLayout>

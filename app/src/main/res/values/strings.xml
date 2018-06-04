@@ -52,6 +52,7 @@
 
 
     <string name="order_button">Book a Happy Ride</string>
+    <string name="order_title">Order Ride</string>
 
 
 </resources>

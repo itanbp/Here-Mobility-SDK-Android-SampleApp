@@ -22,6 +22,7 @@ import com.nil.test.sdk.sampleapp.util.Constant;
 
 public class HomeActivity extends BaseActivity implements MapView.MapReadyListener {
 
+    public static final String CONCERT_KEY = "CONCERT_KEY";
 
     @NonNull
     private static final String LOG_TAG = GetRidesActivity.class.getSimpleName();
@@ -76,8 +77,9 @@ public class HomeActivity extends BaseActivity implements MapView.MapReadyListen
         galleryRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
         galleryRecycler.setLayoutManager(layoutManager);
 
-        galleryAdapter = new ConcertsAdapter(index -> {
+        galleryAdapter = new ConcertsAdapter(concert -> {
             Intent intent = new Intent(this, OrderRideActivity.class);
+            intent.putExtra(CONCERT_KEY, concert);
             startActivity(intent);
         });
         galleryRecycler.setAdapter(galleryAdapter);
@@ -125,7 +127,7 @@ public class HomeActivity extends BaseActivity implements MapView.MapReadyListen
 
     @Override
     protected int getStatusBarColor() {
-        return R.color.status_bar;
+        return R.color.material_grey_400;
     }
 
 

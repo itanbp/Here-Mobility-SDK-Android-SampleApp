@@ -51,16 +51,32 @@ public abstract class BaseActivity extends AppCompatActivity {
             return;
         }
 
+
+        if (showToolbar()) {
+            mToolbar.setTitle(getToolbarTitle());
+            //mToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.material_grey_500));
+        }
+
         setSupportActionBar(mToolbar);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(showToolbar());
+            actionBar.setDisplayHomeAsUpEnabled(showToolbar());
             actionBar.setDisplayShowHomeEnabled(false);
         }
 
-        //mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
+
+
+    protected boolean showToolbar() {
+        return false;
+    }
+
+
+    protected String getToolbarTitle() {
+        return null;
     }
 
 
