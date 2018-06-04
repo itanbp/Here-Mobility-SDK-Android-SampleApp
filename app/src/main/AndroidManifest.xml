@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nil.test.sdk.sampleapp">
-    <!--
-    "com.here.mobility.sdk.sampleapp"
 
-    -->
+    <!--     "com.here.mobility.sdk.sampleapp" -->
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".SampleApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.nil.test.sdk.sampleapp.SampleApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.nil.test.sdk.sampleapp.get_rides.GetRidesActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppThemeNoTitle">
+        <activity
+            android:name=".get_rides.GetRidesActivity"
+            android:theme="@style/AppThemeNoTitle"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        <activity android:name=".geocoding.AutoCompleteActivity" />
+        <activity android:name=".ride_offers.RideOffersActivity" />
+        <activity android:name=".ride_status.RideStatusActivity" />
+        <activity android:name=".rides.ActiveRidesActivity" />
+        <activity android:name=".public_transport.PublicTransportActivity" />
+
+        <meta-data
+            android:name="com.here.mobility.sdk.API_KEY"
+            android:value="@string/here_sdk_app_id" />
+        <meta-data
+            android:name="HERE_SDK_APP_SECRET"
+            android:value="@string/here_sdk_app_secret" />
+
+        <activity
+            android:name=".happy_ride.HomeActivity"
+            android:theme="@style/HappyRideTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.nil.test.sdk.sampleapp.geocoding.AutoCompleteActivity" />
-        <activity android:name="com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity" />
-        <activity android:name="com.nil.test.sdk.sampleapp.ride_status.RideStatusActivity" />
-        <activity android:name="com.nil.test.sdk.sampleapp.rides.ActiveRidesActivity" />
-        <activity android:name="com.nil.test.sdk.sampleapp.public_transport.PublicTransportActivity" />
-
-        <meta-data
-            android:name="com.here.mobility.sdk.API_KEY"
-            android:value="@string/here_sdk_app_id" />
-
-        <meta-data
-            android:name="HERE_SDK_APP_SECRET"
-            android:value="@string/here_sdk_app_secret" />
     </application>
 
 </manifest>

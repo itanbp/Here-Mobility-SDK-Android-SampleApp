@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nil.test.sdk.sampleapp.happy_ride.HomeActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <fragment
+        android:id="@+id/map_fragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:name="com.here.mobility.sdk.map.MapFragment"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/home_bottom_bar"/>
+
+
+    <View
+        android:id="@+id/home_bottom_bar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <TextView
+        android:id="@+id/home_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_search"
+        android:text="@string/home_discover"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/home_my_trips"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+
+    <TextView
+        android:id="@+id/home_my_trips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_tickets"
+        android:text="@string/home_my_trips"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_search"
+        app:layout_constraintStart_toEndOf="@+id/home_search"
+        app:layout_constraintEnd_toStartOf="@+id/home_my_account"
+        android:alpha="0.7"
+        />
+
+
+    <TextView
+        android:id="@+id/home_my_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_myaccount"
+        android:text="@string/home_account"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_search"
+        app:layout_constraintStart_toEndOf="@+id/home_my_trips"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:alpha="0.7"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_concerts_gallery"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/home_bottom_bar"
+        android:layout_margin="@dimen/views_margin" />
+
+
+</android.support.constraint.ConstraintLayout>

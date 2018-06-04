@@ -10,4 +10,10 @@
     <dimen name="autosizeTextMinTextSize">16sp</dimen>
 
 
+    <dimen name="views_margin">16dp</dimen>
+    <dimen name="divider">16dp</dimen>
+    <dimen name="views_margin_small">8dp</dimen>
+    <dimen name="views_margin_very_small">4dp</dimen>
+
+
 </resources>
