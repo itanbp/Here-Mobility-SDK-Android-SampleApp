@@ -1,5 +1,6 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.here.mobility.sdk.common.util.Cancelable;
@@ -35,7 +39,9 @@ import com.nil.test.sdk.sampleapp.geocoding.AutoCompleteActivity;
 import com.nil.test.sdk.sampleapp.geocoding.AutocompleteAdapter;
 import com.nil.test.sdk.sampleapp.util.Constant;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -57,6 +63,9 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     private VerticalStepperView stepperView;
     private Button orderRideButton;
     private EditText searchAddressEdit;
+    private TextView leaveTime;
+    private LinearLayout bookNowLayout;
+
 
     private String concertSelectedDate;
     private GeocodingResult selectedLocation;
@@ -77,6 +86,12 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
      * Autocomplete adapter.
      */
     private AutocompleteAdapter adapter;
+
+    /**
+     * Pre book timestamp, null means to now.
+     */
+    @Nullable
+    private Long preBookTime = null;
 
 
     @Override
@@ -213,7 +228,8 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
                 break;
 
             case 3:
-                inflateView = LayoutInflater.from(context).inflate(R.layout.order_ride_item_2, parent, false);
+                inflateView = LayoutInflater.from(context).inflate(R.layout.order_ride_item_4, parent, false);
+                setStep4(inflateView);
                 break;
 
             case 4:
@@ -340,7 +356,12 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         RecyclerView autoCompleteRecyclerView = view.findViewById(R.id.auto_complete_recycler_view);
         adapter = new AutocompleteAdapter(adapterListener);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         autoCompleteRecyclerView.setLayoutManager(layoutManager);
         autoCompleteRecyclerView.setItemAnimator(new DefaultItemAnimator());
         autoCompleteRecyclerView.setAdapter(adapter);
@@ -455,5 +476,86 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         }
     };
+
+
+    private void setStep4(View view) {
+
+        leaveTime = view.findViewById(R.id.ride_details_leave_time);
+        bookNowLayout = view.findViewById(R.id.book_now_layout);
+
+        bookNowLayout.setOnClickListener(this::bookNowItemClicked);
+    }
+
+
+    /**
+     * Booking item clicked.
+     * @param clickedItem anchor view to show PopupMenu.
+     */
+    public void bookNowItemClicked(@NonNull View clickedItem){
+        PopupMenu menu = new PopupMenu(this, clickedItem);
+        menu.inflate(R.menu.booking_menu);
+        menu.setOnMenuItemClickListener(item -> {
+
+            switch (item.getItemId()){
+                case R.id.booking_leave_now:
+                    setLeaveTimeToNow();
+                    break;
+
+                case R.id.booking_leave_later:
+                    showTimePickerDialog();
+                    break;
+            }
+
+            return false;
+        });
+        menu.show();
+    }
+
+    /**
+     * Set the leave time to leave now.
+     */
+    private void setLeaveTimeToNow(){
+        preBookTime = null;
+        leaveTime.setText(R.string.leave_now);
+    }
+
+
+    /**
+     * Set leave time to later.
+     * @param calendar a valid calendar.
+     */
+    private void setLeaveTime(@NonNull Calendar calendar){
+        preBookTime = calendar.getTimeInMillis();
+        SimpleDateFormat simple = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        simple.setTimeZone(calendar.getTimeZone());
+        String dateStr = simple.format(calendar.getTime());
+        leaveTime.setText(dateStr);
+    }
+
+    /**
+     * Show TimePickerDialog.
+     */
+    private void showTimePickerDialog(){
+        Calendar calendar = Calendar.getInstance();
+        //The minimum time for pre-book offers is NOW() + 30 minutes.
+        calendar.add(Calendar.MINUTE,30);
+
+        TimePickerDialog picker = new TimePickerDialog(this, R.style.BookingDatePicker,(view, hourOfDay, minute) -> {
+            Calendar minimumTimeForPreBook = Calendar.getInstance();
+            minimumTimeForPreBook.add(Calendar.MINUTE,30);
+            Calendar pickerTime = Calendar.getInstance();
+            pickerTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            pickerTime.set(Calendar.MINUTE, minute);
+            //check if pickerTime is valid.
+            if (pickerTime.after(minimumTimeForPreBook)){
+                setLeaveTime(pickerTime);
+            }else{
+                Toast.makeText(this,R.string.invalid_prebooking_time,Toast.LENGTH_LONG).show();
+            }
+
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+        picker.setTitle(R.string.prebook_time_picker_title);
+        picker.show();
+    }
 
 }

@@ -53,6 +53,7 @@
 
     <string name="order_button">Book a Happy Ride</string>
     <string name="order_title">Order Ride</string>
+    <string name="order_search_hint">Enter your pickup address</string>
 
 
 </resources>
