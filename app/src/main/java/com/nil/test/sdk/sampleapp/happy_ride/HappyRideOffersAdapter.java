@@ -1,4 +1,4 @@
-package com.nil.test.sdk.sampleapp.ride_offers;
+package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.UiThread;
@@ -24,13 +24,13 @@ import java.util.Locale;
 /**********************************************************
  * Copyright © 2018 HERE Global B.V. All rights reserved. *
  **********************************************************/
-public class RideOffersAdapter extends RecyclerView.Adapter<RideOffersAdapter.RideOfferItem> {
+public class HappyRideOffersAdapter extends RecyclerView.Adapter<HappyRideOffersAdapter.RideOfferItem> {
 
 
     /**
      * Ride offer list item listener.
      */
-    public interface RideOffersListener{
+    public interface RideOffersListener {
 
 
         /**
@@ -55,7 +55,7 @@ public class RideOffersAdapter extends RecyclerView.Adapter<RideOffersAdapter.Ri
     private RideOffersListener listener;
 
 
-    RideOffersAdapter(@NonNull RideOffersListener listener) {
+    HappyRideOffersAdapter(@NonNull RideOffersListener listener) {
         this.listener = listener;
     }
 
@@ -65,7 +65,7 @@ public class RideOffersAdapter extends RecyclerView.Adapter<RideOffersAdapter.Ri
     public RideOfferItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.ride_offer_list_item, parent, false);
-        return new RideOffersAdapter.RideOfferItem(itemView);
+        return new HappyRideOffersAdapter.RideOfferItem(itemView);
     }
 
 

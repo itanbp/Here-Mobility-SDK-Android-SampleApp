@@ -18,7 +18,7 @@
     <string name="fill_mandatory_fields">Please fill in all mandatory fields</string>
     <string name="ride_options">Ride Options</string>
 
-    <string name="eta">ETA</string>
+    <string name="eta">eta</string>
     <string name="estimated_price">Estimated Price</string>
     <string name="book">Book</string>
 
@@ -46,6 +46,10 @@
     <string name="home_my_trips">My Trips</string>
     <string name="home_account">Account</string>
     <string name="home_title">London</string>
+
+
+    <string name="offer_button">Select</string>
+
 
 
 
