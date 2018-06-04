@@ -21,12 +21,17 @@ import java.util.List;
 public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHolder> {
 
 
+    interface ConcertListener {
+        void concertChoose(int index);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image;
         TextView title;
         TextView arena;
         TextView date;
+        View view;
 
         ViewHolder(View view) {
             super(view);
@@ -35,18 +40,20 @@ public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHo
             title = view.findViewById(R.id.gallery_card_title);
             arena = view.findViewById(R.id.gallery_card_arena);
             date = view.findViewById(R.id.gallery_card_date);
+            this.view = view;
 
-            view.setOnClickListener(listener);
         }
     }
 
 
+    private ConcertListener listener;
     private ArrayList<Concert> concertsList;
 
 
 
-    public ConcertsAdapter() {
+    public ConcertsAdapter(ConcertListener listener) {
         concertsList = getMockData();
+        this.listener = listener;
     }
 
 
@@ -69,25 +76,17 @@ public class ConcertsAdapter extends RecyclerView.Adapter<ConcertsAdapter.ViewHo
         holder.arena.setText(concert.arena);
         holder.date.setText(concert.date);
 
-
+        holder.view.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.concertChoose(position);
+                }
+        });
     }
 
     @Override
     public int getItemCount() {
         return concertsList.size();
     }
-
-
-    private static View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            /*
-            Snackbar snackbar = Snackbar.make(view, R.string.not_developed, Snackbar.LENGTH_LONG);
-            snackbar.show();
-            */
-        }
-    };
-
 
 
 

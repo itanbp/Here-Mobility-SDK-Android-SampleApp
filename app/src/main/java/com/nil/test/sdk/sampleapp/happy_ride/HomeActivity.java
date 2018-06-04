@@ -1,6 +1,7 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -75,7 +76,10 @@ public class HomeActivity extends BaseActivity implements MapView.MapReadyListen
         galleryRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
         galleryRecycler.setLayoutManager(layoutManager);
 
-        galleryAdapter = new ConcertsAdapter();
+        galleryAdapter = new ConcertsAdapter(index -> {
+            Intent intent = new Intent(this, OrderRideActivity.class);
+            startActivity(intent);
+        });
         galleryRecycler.setAdapter(galleryAdapter);
 
     }
