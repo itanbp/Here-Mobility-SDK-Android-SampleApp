@@ -28,7 +28,7 @@
     <string name="leave_now">Leave now</string>
     <string name="leave_later">Set your departure time</string>
     <string name="invalid_prebooking_time">Please select pre-booking date that is at least 30 minutes from now</string>
-    <string name="prebook_time_picker_title">Must be at least 30 minutes from now.</string>
+    <string name="prebook_time_picker_title">Must be at least 30 minutes from now</string>
 
     <string name="autocomplete_title">Autocomplete</string>
     <string name="show_offers_title">Show Rides</string>
@@ -54,6 +54,7 @@
     <string name="order_button">Book a Happy Ride</string>
     <string name="order_title">Order Ride</string>
     <string name="order_search_hint">Enter your pickup address</string>
+    <string name="order_continue">continue</string>
 
 
 </resources>

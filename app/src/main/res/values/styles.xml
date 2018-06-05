@@ -148,6 +148,12 @@
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="HappyBookingDatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/material_blue_500</item>
+        <item name="colorControlHighlight">@color/purple</item>
+        <item name="colorControlActivated">@color/purple</item>
+    </style>
+
     <style name="RegistrationDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>

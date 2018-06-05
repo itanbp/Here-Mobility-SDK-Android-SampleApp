@@ -569,7 +569,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
         //The minimum time for pre-book offers is NOW() + 30 minutes.
         calendar.add(Calendar.MINUTE, 30);
 
-        TimePickerDialog picker = new TimePickerDialog(this, R.style.BookingDatePicker, (view, hourOfDay, minute) -> {
+        TimePickerDialog picker = new TimePickerDialog(this, R.style.HappyBookingDatePicker, (view, hourOfDay, minute) -> {
             Calendar minimumTimeForPreBook = Calendar.getInstance();
             minimumTimeForPreBook.add(Calendar.MINUTE, 30);
             Calendar pickerTime = Calendar.getInstance();
