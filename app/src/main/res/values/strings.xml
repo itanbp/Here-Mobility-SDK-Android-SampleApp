@@ -61,8 +61,8 @@
 
     <string name="confirmation_title">Yay!</string>
     <string name="confirmation_subtitle">You just got yourself a HappyRide!</string>
-    <string name="confirmation_order_number">Order #%1$d</string>
-    <string name="confirmation_calender">Add To Calander</string>
+    <string name="confirmation_order_number">Order #%1$s</string>
+    <string name="confirmation_calender">Add To Calendar</string>
 
 
 </resources>
