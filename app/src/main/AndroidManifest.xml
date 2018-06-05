@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SampleApplication"
         android:allowBackup="true"
@@ -17,7 +25,7 @@
         <activity
             android:name=".get_rides.GetRidesActivity"
             android:theme="@style/AppThemeNoTitle"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".geocoding.AutoCompleteActivity" />
         <activity android:name=".ride_offers.RideOffersActivity" />
         <activity android:name=".ride_status.RideStatusActivity" />
@@ -31,7 +39,7 @@
             android:name="HERE_SDK_APP_SECRET"
             android:value="@string/here_sdk_app_secret" />
 
-        <activity android:name=".happy_ride.HomeActivity"></activity>
+        <activity android:name=".happy_ride.HomeActivity" />
         <activity android:name=".happy_ride.MarketplaceActivity" />
         <activity android:name=".happy_ride.OrderRideActivity" />
         <activity android:name=".happy_ride.SplashActivity">
@@ -41,7 +49,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".happy_ride.OrderConfirmationActivity"></activity>
+        <activity android:name=".happy_ride.OrderConfirmationActivity" />
+        <activity android:name=".happy_ride.CameraActivity"></activity>
     </application>
 
 </manifest>
