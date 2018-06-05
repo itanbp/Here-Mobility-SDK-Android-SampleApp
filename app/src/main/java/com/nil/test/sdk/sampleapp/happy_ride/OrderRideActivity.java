@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ import com.nil.test.sdk.sampleapp.geocoding.AutocompleteAdapter;
 import com.nil.test.sdk.sampleapp.get_rides.GetRidesActivity;
 import com.nil.test.sdk.sampleapp.ride_offers.RideOffersActivity;
 import com.nil.test.sdk.sampleapp.util.Constant;
+import com.nil.test.sdk.sampleapp.widget.CounterView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,6 +79,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     private EditText searchAddressEdit;
     private TextView leaveTime;
     private LinearLayout bookNowLayout;
+    private CounterView passenger;
 
 
     private String concertSelectedDate;
@@ -255,7 +258,8 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
                 break;
 
             case 4:
-                inflateView = LayoutInflater.from(context).inflate(R.layout.order_ride_item_2, parent, false);
+                inflateView = LayoutInflater.from(context).inflate(R.layout.order_ride_item_5, parent, false);
+                setStep5(inflateView);
                 break;
 
             default:
@@ -272,8 +276,9 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
                 if (stepperView.canNext()) {
                     stepperView.nextStep();
                 } else if (stepperView.getCurrentStep() == 4) { // last step
-                    orderRideButton.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    //orderRideButton.setTextColor(ContextCompat.getColor(this, R.color.white));
                     orderRideButton.setEnabled(true);
+                    ViewCompat.setBackgroundTintList(orderRideButton, ContextCompat.getColorStateList(this, R.color.purple));
                 }
             });
         }
@@ -281,7 +286,9 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         if (cancelButton != null) {
             cancelButton.setOnClickListener(v -> {
-                if (stepperView.canPrev()) {
+                if (stepperView.getCurrentStep() == 1) {
+                    // nothing
+                } else if (stepperView.canPrev()) {
                     stepperView.prevStep();
                 }
             });
@@ -514,6 +521,11 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
     }
 
 
+    private void setStep5(View view) {
+        passenger = view.findViewById(R.id.ride_details_passenger_counter);
+    }
+
+
     /**
      * Booking item clicked.
      *
@@ -594,7 +606,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
             return;
         }
 
-        BookingConstraints constraints = BookingConstraints.create(1, 0);
+        BookingConstraints constraints = BookingConstraints.create(passenger.getCounterValue(), 0);
         RideWaypoints rideWayPoints = RideWaypoints.create(selectedLocation.getLocation(), concert.getLatLng());
 
         requestRideOffers(rideWayPoints, constraints, "", preBookTime);

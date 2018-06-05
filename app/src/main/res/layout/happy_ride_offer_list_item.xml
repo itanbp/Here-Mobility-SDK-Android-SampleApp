@@ -60,7 +60,7 @@
             android:textColor="#ffffff"
             android:letterSpacing="0.01"
             android:lineSpacingExtra="4sp"
-            android:theme="@style/LargeButtonCyan"
+            android:theme="@style/LargeButtonPurple"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/views_margin_card"
