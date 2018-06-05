@@ -50,7 +50,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".happy_ride.OrderConfirmationActivity" />
-        <activity android:name=".happy_ride.CameraActivity"></activity>
+        <activity android:name=".happy_ride.CameraActivity" />
+        <activity android:name=".happy_ride.StickersActivity"></activity>
     </application>
 
 </manifest>

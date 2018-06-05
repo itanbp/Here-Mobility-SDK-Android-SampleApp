@@ -1,6 +1,7 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
@@ -29,6 +30,8 @@ import ai.deepar.ar.CameraGrabberListener;
 import ai.deepar.ar.CameraOrientation;
 import ai.deepar.ar.CameraResolutionPreset;
 import ai.deepar.ar.DeepAR;
+
+import static com.nil.test.sdk.sampleapp.happy_ride.StickersActivity.BITMAP_KEY;
 
 public class CameraActivity extends PermissionsActivity implements AREventListener, SurfaceHolder.Callback {
 
@@ -262,6 +265,10 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
     @Override
     public void screenshotTaken(final Bitmap screenshot) {
         if (screenshot != null) {
+            Intent intent = new Intent(this, StickersActivity.class);
+            HappyRideData.getInstance().setBitmap(screenshot);
+            //intent.putExtra(BITMAP_KEY, screenshot);
+            startActivity(intent);
         }
     }
 
