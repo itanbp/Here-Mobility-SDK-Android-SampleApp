@@ -33,6 +33,8 @@ import ai.deepar.ar.DeepAR;
 public class CameraActivity extends PermissionsActivity implements AREventListener, SurfaceHolder.Callback {
 
 
+    private final static String SLOT_MASKS = "masks";
+
     private SurfaceView arView;
     private ImageView captureButton;
     private ImageView switchMaskButton;
@@ -251,6 +253,9 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
 
         captureButton = (ImageView) findViewById(R.id.camera_capture_button);
         captureButton.setOnClickListener(v -> deepAR.takeScreenshot());
+
+        switchMaskButton = (ImageView) findViewById(R.id.camera_switch_mask);
+        switchMaskButton.setOnClickListener(v -> deepAR.switchEffect(SLOT_MASKS, masks.get(1).getPath()));
 
     }
 
