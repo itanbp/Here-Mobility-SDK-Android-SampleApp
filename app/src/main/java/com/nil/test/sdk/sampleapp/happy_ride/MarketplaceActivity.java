@@ -42,6 +42,16 @@ public class MarketplaceActivity extends BaseActivity {
         return R.color.status_bar;
     }
 
+    @Override
+    protected boolean showToolbar() {
+        return true;
+    }
+
+
+    @Override
+    protected String getToolbarTitle() {
+        return getString(R.string.market_place_title);
+    }
 
     private void initViews() {
 
