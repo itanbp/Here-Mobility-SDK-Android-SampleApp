@@ -1,12 +1,15 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.google.common.collect.Lists;
+import com.here.mobility.sdk.demand.PublicTransportRideOffer;
 import com.here.mobility.sdk.demand.RideOffer;
+import com.here.mobility.sdk.demand.TaxiRideOffer;
 import com.nil.test.sdk.sampleapp.R;
 
 import java.util.ArrayList;
@@ -64,8 +67,27 @@ public class MarketplaceActivity extends BaseActivity {
         ArrayList<RideOffer> rideOffers = getRideOffers();
 
 
-        offersAdapter = new HappyRideOffersAdapter(null, rideOffers);
+        offersAdapter = new HappyRideOffersAdapter(offer -> {
+            offer.accept(new RideOffer.Visitor<Void>() {
+                @Override
+                public Void visit(@NonNull TaxiRideOffer taxiRideOffer) {
+                    Intent intent = new Intent(MarketplaceActivity.this, OrderConfirmationActivity.class);
+                    startActivity(intent);
+                    return null;
+                }
+
+                @Override
+                public Void visit(@NonNull PublicTransportRideOffer publicTransportRideOffer) {
+                    return null;
+                }
+            });
+        }, rideOffers);
         offersRecycler.setAdapter(offersAdapter);
+
+    }
+
+
+    private void handleOfferSelection() {
 
     }
 

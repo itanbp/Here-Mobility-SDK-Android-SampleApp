@@ -125,6 +125,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         stepperView = findViewById(R.id.order_ride_stepper);
         stepperView.setStepperAdapter(this);
+        stepperView.setActivatedColor(ContextCompat.getColor(this, R.color.purple));
 
         stepperView.nextStep(); // first step already filled
 
