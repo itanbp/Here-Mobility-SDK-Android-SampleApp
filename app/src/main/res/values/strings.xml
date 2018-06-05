@@ -18,7 +18,7 @@
     <string name="fill_mandatory_fields">Please fill in all mandatory fields</string>
     <string name="ride_options">Ride Options</string>
 
-    <string name="eta">ETA</string>
+    <string name="eta">eta</string>
     <string name="estimated_price">Estimated Price</string>
     <string name="book">Book</string>
 
@@ -28,7 +28,7 @@
     <string name="leave_now">Leave now</string>
     <string name="leave_later">Set your departure time</string>
     <string name="invalid_prebooking_time">Please select pre-booking date that is at least 30 minutes from now</string>
-    <string name="prebook_time_picker_title">Must be at least 30 minutes from now.</string>
+    <string name="prebook_time_picker_title">Must be at least 30 minutes from now</string>
 
     <string name="autocomplete_title">Autocomplete</string>
     <string name="show_offers_title">Show Rides</string>
@@ -47,6 +47,22 @@
     <string name="home_account">Account</string>
     <string name="home_title">London</string>
 
+
+    <string name="offer_button">Select</string>
+
+
+    <string name="order_button">Book a Happy Ride</string>
+    <string name="order_title">Order Ride</string>
+    <string name="order_search_hint">Enter your pickup address</string>
+    <string name="order_continue">continue</string>
+
+    <string name="market_place_title">Pick your HappyRide</string>
+
+
+    <string name="confirmation_title">Yay!</string>
+    <string name="confirmation_subtitle">You just got yourself a HappyRide!</string>
+    <string name="confirmation_order_number">Order #%1$s</string>
+    <string name="confirmation_calender">Add To Calendar</string>
 
 
 </resources>

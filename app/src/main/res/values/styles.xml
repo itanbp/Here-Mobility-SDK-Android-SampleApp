@@ -1,9 +1,9 @@
 <resources>
 
     <style name="HappyRideTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryDark">@color/status_bar</item>
+        <item name="colorAccent">@color/material_grey_500</item>
         <!--<item name="android:windowBackground">@color/background</item>-->
         <!--<item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24dp</item>-->
         <item name="windowActionBar">false</item>
@@ -72,10 +72,14 @@
         <item name="android:layout_marginBottom">7dp</item>
     </style>
 
-    <style name="GetRideVerticalDividersLayout">
+    <style name="GetRideVerticalDividersLayout" parent="GetRideLayout">
+        <item name="android:divider">?android:dividerVertical</item>
+    </style>
+
+
+    <style name="GetRideLayout">
         <item name="android:orientation">horizontal</item>
         <item name="android:showDividers">beginning|end</item>
-        <item name="android:divider">?android:dividerVertical</item>
         <item name="android:layout_height">@dimen/GetRideRideConstraintItemHeight</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:gravity">center_vertical</item>
@@ -111,6 +115,16 @@
         <item name="android:padding">14dp</item>
     </style>
 
+
+    <style name="LargeButtonPurple" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/purple</item>
+    </style>
+
+
+    <style name="LargeButtonGrey" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/material_grey_500</item>
+    </style>
+
     <style name="ButtonsBigCenterWhite">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">20sp</item>
@@ -140,6 +154,12 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorPrimaryDark</item>
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="HappyBookingDatePicker" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/material_blue_500</item>
+        <item name="colorControlHighlight">@color/purple</item>
+        <item name="colorControlActivated">@color/purple</item>
     </style>
 
     <style name="RegistrationDialog" parent="Theme.AppCompat.Light.Dialog.Alert">

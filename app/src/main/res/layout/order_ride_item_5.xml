@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!--Passengers-->
+    <LinearLayout
+        android:id="@+id/passengers_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/GetRideLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/views_margin_small"
+        android:layout_marginTop="@dimen/views_margin_small">
+
+        <ImageView
+            style="@style/GetRideSmallIcon"
+            android:src="@drawable/people" />
+
+        <TextView
+            style="@style/PlainTextMediumLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/passengers" />
+
+        <com.nil.test.sdk.sampleapp.widget.CounterView
+            android:id="@+id/ride_details_passenger_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/RideDetailsInnerMargin"
+            app:initial_value="1"
+            app:max_value="8"
+            app:min_value="1" />
+
+
+    </LinearLayout>
+
+
+
+    <include
+        layout="@layout/ride_buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passengers_layout"
+        android:layout_marginTop="@dimen/views_margin_small"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -15,5 +15,7 @@
     <color name="separator_gray">#d7d7d7</color>
 
     <color name="purple">#6900ff</color>
+    <color name="status_bar">#4527A0</color>
+    <color name="teal">#08c299</color>
 
 </resources>

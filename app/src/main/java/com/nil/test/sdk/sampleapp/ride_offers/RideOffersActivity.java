@@ -40,13 +40,13 @@ public class RideOffersActivity extends AppCompatActivity implements RideOffersA
     /**
      * Taxi Ride offers list Intent.extra key.
      */
-    private static final String EXTRA_TAXI_RIDE_OFFER_LIST = "TAXI_RIDE_OFFER_LIST";
+    public static final String EXTRA_TAXI_RIDE_OFFER_LIST = "TAXI_RIDE_OFFER_LIST";
 
 
     /**
      * Public transportation Ride offers list Intent.extra key.
      */
-    private static final String EXTRA_PT_RIDE_OFFER_LIST = "PT_RIDE_OFFER_LIST";
+    public static final String EXTRA_PT_RIDE_OFFER_LIST = "PT_RIDE_OFFER_LIST";
 
 
     /**

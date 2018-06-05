@@ -14,6 +14,7 @@
     <dimen name="divider">16dp</dimen>
     <dimen name="views_margin_small">8dp</dimen>
     <dimen name="views_margin_very_small">4dp</dimen>
+    <dimen name="views_margin_card">12dp</dimen>
 
 
 </resources>

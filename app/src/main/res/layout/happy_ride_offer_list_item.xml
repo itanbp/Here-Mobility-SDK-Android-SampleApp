@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="140dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <View
+            android:id="@+id/offer_horizontal_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/dividerVertical"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+        <View
+            android:id="@+id/offer_vertical_divider"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="?android:attr/dividerVertical"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/offer_horizontal_divider"
+            card_view:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/supplierNameView"
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="Freeway Taxi With Very long fleet name goes here and here and here"
+            android:textSize="18sp"
+            android:textColor="#4b4b4b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="6sp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/views_margin_card"
+            android:layout_marginStart="@dimen/views_margin_card" />
+
+
+        <Button
+            android:id="@+id/book_button"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="4sp"
+            android:theme="@style/LargeButtonPurple"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/views_margin_card"
+            android:layout_marginEnd="@dimen/views_margin_card"
+            android:text="@string/offer_button"/>
+
+
+        <TextView
+            android:id="@+id/location_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/ic_location"
+            android:text="@string/estimated_price"
+            card_view:layout_constraintTop_toBottomOf="@+id/offer_horizontal_divider"
+            card_view:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/views_margin_card"
+            android:layout_marginStart="@dimen/views_margin_card"/>
+
+
+
+        <TextView
+            android:id="@+id/estimatedPriceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#303030"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="6sp"
+            card_view:layout_constraintStart_toStartOf="@+id/location_icon"
+            card_view:layout_constraintTop_toBottomOf="@+id/location_icon"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="@dimen/views_margin_small"
+            tools:text="$22" />
+
+
+        <TextView
+            android:id="@+id/text_eta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:drawableStart="@drawable/ic_ldate"
+            android:textSize="12sp"
+            android:textColor="#757575"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/eta"
+            android:textAllCaps="true"
+            card_view:layout_constraintTop_toBottomOf="@+id/offer_horizontal_divider"
+            card_view:layout_constraintStart_toEndOf="@+id/offer_vertical_divider"
+            android:layout_marginTop="@dimen/views_margin_card"
+            android:layout_marginStart="@dimen/views_margin_card"/>
+
+
+
+        <TextView
+            android:id="@+id/etaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#303030"
+            android:lineSpacingExtra="6sp"
+            card_view:layout_constraintTop_toBottomOf="@+id/text_eta"
+            card_view:layout_constraintStart_toStartOf="@+id/text_eta"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="@dimen/views_margin_small"
+            tools:text="18:36" />
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>

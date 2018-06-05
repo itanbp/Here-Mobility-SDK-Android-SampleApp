@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <!--Booking-->
+    <LinearLayout
+        android:id="@+id/book_now_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/GetRideVerticalDividersLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/views_margin_small"
+        android:layout_marginTop="@dimen/views_margin_small">
+
+        <ImageView
+            style="@style/GetRideSmallIcon"
+            android:src="@drawable/ic_alarm_black_24dp" />
+
+        <TextView
+            android:id="@+id/ride_details_leave_time"
+            style="@style/PlainTextMediumLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leave_now" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:scaleType="fitStart"
+            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+
+    </LinearLayout>
+
+
+    <include
+        layout="@layout/ride_buttons_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_now_layout"
+        android:layout_marginTop="@dimen/views_margin_small"/>
+
+
+
+</android.support.constraint.ConstraintLayout>

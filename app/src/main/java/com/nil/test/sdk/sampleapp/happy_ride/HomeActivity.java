@@ -1,14 +1,13 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.here.mobility.sdk.common.util.PermissionUtils;
@@ -23,6 +22,7 @@ import com.nil.test.sdk.sampleapp.util.Constant;
 
 public class HomeActivity extends BaseActivity implements MapView.MapReadyListener {
 
+    public static final String CONCERT_KEY = "CONCERT_KEY";
 
     @NonNull
     private static final String LOG_TAG = GetRidesActivity.class.getSimpleName();
@@ -77,7 +77,11 @@ public class HomeActivity extends BaseActivity implements MapView.MapReadyListen
         galleryRecycler.addItemDecoration(new RecyclerItemDecoration(getResources().getDimensionPixelSize(R.dimen.divider)));
         galleryRecycler.setLayoutManager(layoutManager);
 
-        galleryAdapter = new ConcertsAdapter();
+        galleryAdapter = new ConcertsAdapter(concert -> {
+            Intent intent = new Intent(this, OrderRideActivity.class);
+            intent.putExtra(CONCERT_KEY, concert);
+            startActivity(intent);
+        });
         galleryRecycler.setAdapter(galleryAdapter);
 
     }
@@ -118,6 +122,12 @@ public class HomeActivity extends BaseActivity implements MapView.MapReadyListen
                 startLocationUpdates();
             }
         }
+    }
+
+
+    @Override
+    protected int getStatusBarColor() {
+        return R.color.material_grey_400;
     }
 
 

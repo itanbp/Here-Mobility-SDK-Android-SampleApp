@@ -15,5 +15,11 @@ public class Constant {
      * Expiration hours login session.
      */
     public static final int EXPIRATION_HOURS = 48;
+
+
+    public static final LatLng LONDON_STADIUM = LatLng.fromDegrees(51.53769, -0.01469);
+
+    public static final LatLng O2_ARENA = LatLng.fromDegrees(51.51447, 0.008576);
+
 }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/search_address_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/search_address_edit_text_height"
+        android:background="@drawable/search_panel_bg"
+        android:paddingEnd="@dimen/layout_horizontal_standard_value"
+        android:paddingStart="@dimen/layout_horizontal_standard_value"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="@string/order_search_hint"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/auto_complete_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="@dimen/layout_vertical_standard_value"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_address_edit_text" />
+
+
+
+</android.support.constraint.ConstraintLayout>
