@@ -2,6 +2,7 @@ package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -23,6 +24,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private StickersAdapter stickersAdapter;
     private ImageView stickerFrame;
     private ImageView stickerDrag;
+    private CoordinatorLayout stickersContainer;
 
 
 
@@ -33,6 +35,9 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickersRecycler = findViewById(R.id.stickers_gallery);
         stickerFrame = findViewById(R.id.sticker_frame);
         stickerDrag = findViewById(R.id.sticker_drag);
+        stickersContainer = findViewById(R.id.stickers_container);
+
+        stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag));
 
         screenshotBackground = findViewById(R.id.sticker_screenshot_background);
         screenshotBitmap = HappyRideData.getInstance().getBitmap();
