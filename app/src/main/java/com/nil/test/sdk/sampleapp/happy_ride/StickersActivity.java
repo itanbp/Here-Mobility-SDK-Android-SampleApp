@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private ImageView stickerFrame;
     private ImageView stickerDrag;
     private CoordinatorLayout stickersContainer;
+    private ConstraintLayout bottomSheetContainer;
 
 
     private String bitmapPath;
@@ -60,6 +62,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickerFrame = findViewById(R.id.sticker_frame);
         stickerDrag = findViewById(R.id.sticker_drag);
         stickersContainer = findViewById(R.id.stickers_container);
+        bottomSheetContainer = findViewById(R.id.stickers_bottom_sheet);
 
         stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag, new OnDragTouchListener.OnDragActionListener() {
             @Override
@@ -188,12 +191,6 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
             return;
         }
 
-        /*
-        Bitmap bitmap = Bitmap.createBitmap(stickersContainer.getWidth(), stickersContainer.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        stickersContainer.draw(canvas);
-        */
-
         Bitmap bitmap = takeScreenShot(this);
 
         CharSequence now = DateFormat.format("yyyy_MM_dd_hh_mm_ss", new Date());
@@ -219,7 +216,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
                 shareIntent.setPackage("com.instagram.android");
 
                 try {
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmapPath, "GO Mobility", "MoBiLiTy")));
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), imageFile.getPath(), "GO Mobility", "MoBiLiTy")));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -239,6 +236,10 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
     private Bitmap takeScreenShot(Activity activity) {
 
+        setToolbarVisibility(false);
+        bottomSheetContainer.setVisibility(View.INVISIBLE);
+
+
         View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         view.buildDrawingCache();
@@ -253,6 +254,10 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
         Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
         view.destroyDrawingCache();
+
+        setToolbarVisibility(true);
+        bottomSheetContainer.setVisibility(View.VISIBLE);
+
         return b;
     }
 
