@@ -20,6 +20,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -144,6 +145,16 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
         if (stickerElement.draggable) {
             stickerDrag.setImageResource(drawableId);
+            if (stickerElement.slot < 2) {
+                int size = (int) getResources().getDimension(R.dimen.stickers_size);
+                stickerDrag.getLayoutParams().height = size;
+                stickerDrag.getLayoutParams().width = size;
+            } else {
+                ViewGroup.LayoutParams params = stickerDrag.getLayoutParams();
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                stickerDrag.setLayoutParams(params);
+            }
         } else {
             stickerFrame.setImageResource(drawableId);
         }
@@ -160,7 +171,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         drawableIds.add(R.drawable.stickers_26);
         drawableIds.add(R.drawable.stickers_27);
         drawableIds.add(R.drawable.stickers_28);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 0));
 
 
         drawableIds = new ArrayList<>();
@@ -169,7 +180,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         drawableIds.add(R.drawable.stickers_06);
         drawableIds.add(R.drawable.stickers_07);
         drawableIds.add(R.drawable.stickers_08);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 1));
 
 
         drawableIds = new ArrayList<>();
@@ -178,40 +189,40 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         drawableIds.add(R.drawable.stickers_2);
         drawableIds.add(R.drawable.stickers_3);
         drawableIds.add(R.drawable.stickers_4);
-        stickers.add(new StickerElement(drawableIds, false));
+        stickers.add(new StickerElement(drawableIds, false, 2));
 
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_17);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 3));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_15);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 4));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_16);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 5));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_21);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 6));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_22);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 7));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_10);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 8));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_11);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 9));
 
         drawableIds = new ArrayList<>();
         drawableIds.add(R.drawable.stickers_13);
-        stickers.add(new StickerElement(drawableIds, true));
+        stickers.add(new StickerElement(drawableIds, true, 10));
 
         return stickers;
     }

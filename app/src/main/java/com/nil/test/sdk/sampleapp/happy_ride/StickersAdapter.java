@@ -83,11 +83,13 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
         boolean draggable; // draggable or frame
         int index;
         private boolean hasNext;
+        int slot;
 
 
-        public StickerElement(List<Integer> drawableIds, boolean draggable) {
+        public StickerElement(List<Integer> drawableIds, boolean draggable, int slot) {
             this.drawableIds = drawableIds;
             this.draggable = draggable;
+            this.slot = slot;
             index = 0;
         }
 
