@@ -4,12 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -18,15 +14,11 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.nil.test.sdk.sampleapp.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +32,7 @@ import ai.deepar.ar.CameraOrientation;
 import ai.deepar.ar.CameraResolutionPreset;
 import ai.deepar.ar.DeepAR;
 
-import static com.nil.test.sdk.sampleapp.happy_ride.StickersActivity.BITMAP_KEY;
+import static com.nil.test.sdk.sampleapp.happy_ride.StickersActivity.BITMAP_PATH_KEY;
 
 public class CameraActivity extends PermissionsActivity implements AREventListener, SurfaceHolder.Callback {
 
@@ -274,13 +266,7 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
     @Override
     public void screenshotTaken(final Bitmap screenshot) {
         if (screenshot != null) {
-            /*
-            Intent intent = new Intent(this, StickersActivity.class);
-            HappyRideData.getInstance().setBitmap(screenshot);
-            startActivity(intent);
-            */
-
-            shareBitmap(screenshot);
+            saveBitmap(screenshot);
         }
     }
 
@@ -329,47 +315,31 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
     public void error(String error) {
     }
 
+    private void saveBitmap(Bitmap bitmap) {
 
-    private void shareBitmap(Bitmap bitmap) {
+        CharSequence now = DateFormat.format("yyyy_MM_dd_hh_mm_ss", new Date());
 
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+        try {
 
-        if (intent != null) {
+            File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/DeepAR_" + now + ".jpg");
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
 
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setPackage("com.instagram.android");
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
 
+            outputStream.flush();
+            outputStream.close();
 
-            CharSequence now = DateFormat.format("yyyy_MM_dd_hh_mm_ss", new Date());
+            MediaScannerConnection.scanFile(CameraActivity.this, new String[]{imageFile.toString()}, null, null);
 
-            try {
+            Intent intent = new Intent(this, StickersActivity.class);
+            intent.putExtra(BITMAP_PATH_KEY, imageFile.getPath());
+            startActivity(intent);
 
-                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/DeepAR_" + now + ".jpg");
-                FileOutputStream outputStream = new FileOutputStream(imageFile);
-
-                int quality = 100;
-                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-
-                outputStream.flush();
-                outputStream.close();
-
-                MediaScannerConnection.scanFile(CameraActivity.this, new String[]{imageFile.toString()}, null, null);
-
-                try {
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), imageFile.getPath(), "GO Mobility", "MoBiLiTy")));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                shareIntent.setType("image/jpeg");
-                startActivity(shareIntent);
-
-
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
+
     }
 
 

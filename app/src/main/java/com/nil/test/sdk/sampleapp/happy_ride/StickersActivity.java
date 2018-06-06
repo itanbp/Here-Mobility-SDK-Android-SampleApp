@@ -1,22 +1,31 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.nil.test.sdk.sampleapp.happy_ride.StickersAdapter.StickerElement;
 import com.nil.test.sdk.sampleapp.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class StickersActivity extends BaseActivity implements StickersAdapter.ItemClickListener {
 
 
-    public static final String BITMAP_KEY = "BITMAP_KEY";
+    public static final String BITMAP_PATH_KEY = "BITMAP_PATH_KEY";
 
 
     private Bitmap screenshotBitmap;
@@ -28,10 +37,16 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private CoordinatorLayout stickersContainer;
 
 
+    private String bitmapPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getIntent().hasExtra(BITMAP_PATH_KEY)) {
+            bitmapPath = getIntent().getStringExtra(BITMAP_PATH_KEY);
+        }
 
         stickersRecycler = findViewById(R.id.stickers_gallery);
         stickerFrame = findViewById(R.id.sticker_frame);
@@ -56,8 +71,6 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         }));
 
         screenshotBackground = findViewById(R.id.sticker_screenshot_background);
-        screenshotBitmap = HappyRideData.getInstance().getBitmap();
-        screenshotBackground.setImageBitmap(screenshotBitmap);
 
 
         stickersRecycler.setLayoutManager(new GridLayoutManager(this, 3));
@@ -70,6 +83,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
             Log.v("MOTEK", "stickerFrame");
         });
 
+        setBackgroundImage();
 
     }
 
@@ -143,6 +157,46 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         return stickers;
     }
 
+
+    private void setBackgroundImage() {
+
+        if (TextUtils.isEmpty(bitmapPath)) {
+            return;
+        }
+
+        File imgFile = new File(bitmapPath);
+
+        if (imgFile.exists()) {
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            screenshotBackground.setImageBitmap(myBitmap);
+
+        }
+    }
+
+    private void shareBitmap(String bitmapPath) {
+
+        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+
+        if (intent != null) {
+
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setPackage("com.instagram.android");
+
+
+            try {
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmapPath, "GO Mobility", "MoBiLiTy")));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            shareIntent.setType("image/jpeg");
+            startActivity(shareIntent);
+
+
+        }
+    }
 
 
 }
