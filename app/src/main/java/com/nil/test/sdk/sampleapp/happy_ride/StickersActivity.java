@@ -20,6 +20,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.nil.test.sdk.sampleapp.happy_ride.StickersAdapter.StickerElement;
@@ -45,6 +46,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private ImageView stickerDrag;
     private CoordinatorLayout stickersContainer;
     private ConstraintLayout bottomSheetContainer;
+    private Button saveButton;
 
 
     private String bitmapPath;
@@ -63,6 +65,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickerDrag = findViewById(R.id.sticker_drag);
         stickersContainer = findViewById(R.id.stickers_container);
         bottomSheetContainer = findViewById(R.id.stickers_bottom_sheet);
+        saveButton = findViewById(R.id.stickers_save_button);
 
         stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag, new OnDragTouchListener.OnDragActionListener() {
             @Override
@@ -77,7 +80,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
             @Override
             public void onClick() {
-                Log.v("MOTEK", "stickerDrag");
+
             }
         }));
 
@@ -91,6 +94,11 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
 
         stickerFrame.setOnClickListener(v -> {
+
+        });
+
+
+        saveButton.setOnClickListener(v -> {
             shareBitmap();
         });
 

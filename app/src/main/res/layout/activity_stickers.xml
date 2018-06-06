@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/stickers_container"
@@ -13,16 +12,35 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        android:background="@android:color/transparent"/>
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+
+        <Button
+            android:id="@+id/stickers_save_button"
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:letterSpacing="0.01"
+            android:lineSpacingExtra="4sp"
+            android:text="@string/stickers_save"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:theme="@style/LargeButtonPurple"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/views_margin"/>
+
+
+    </android.support.v7.widget.Toolbar>
+
 
 
     <ImageView
         android:id="@+id/sticker_screenshot_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 
     <ImageView
@@ -35,12 +53,12 @@
         android:id="@+id/sticker_drag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
 
     <include
         android:id="@+id/stickers_bottom_sheet"
-        layout="@layout/stickers_bottom_sheet"/>
+        layout="@layout/stickers_bottom_sheet" />
 
 
 </android.support.design.widget.CoordinatorLayout>
