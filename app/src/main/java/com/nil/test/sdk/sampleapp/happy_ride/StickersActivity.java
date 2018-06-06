@@ -48,6 +48,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private CoordinatorLayout stickersContainer;
     private ConstraintLayout bottomSheetContainer;
     private Button saveButton;
+    private ImageView advanceButton;
 
 
     private String bitmapPath;
@@ -69,6 +70,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickersContainer = findViewById(R.id.stickers_container);
         bottomSheetContainer = findViewById(R.id.stickers_bottom_sheet);
         saveButton = findViewById(R.id.stickers_save_button);
+        advanceButton = findViewById(R.id.stickers_advance);
 
         draggableElement = null;
         frameElement = null;
@@ -106,6 +108,21 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickersAdapter.setClickListener(this);
         stickersRecycler.setAdapter(stickersAdapter);
 
+        advanceButton.setOnClickListener(v -> {
+            if (draggableElement != null) {
+                draggableElement.index++;
+                if (draggableElement.hasNext()) {
+                    stickerDrag.setImageResource(draggableElement.drawableIds.get(draggableElement.index));
+                }
+            } else if (frameElement != null) {
+                if (frameElement != null) {
+                    frameElement.index++;
+                    if (frameElement.hasNext()) {
+                        stickerDrag.setImageResource(frameElement.drawableIds.get(frameElement.index));
+                    }
+                }
+            }
+        });
 
         stickerFrame.setOnClickListener(v -> {
             /*
@@ -162,27 +179,32 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         }
 
         int index = stickerElement.index + (stickerElement.hasNext() ? 1 : 0);
-        int drawableId = stickerElement.drawableIds.get(index);
 
-        if (stickerElement.draggable) {
-            stickerDrag.setImageResource(drawableId);
+        if (index < stickerElement.drawableIds.size()) {
 
-            //
-            if (stickerElement.slot < 2) {
-                int size = (int) getResources().getDimension(R.dimen.stickers_size);
-                stickerDrag.getLayoutParams().height = size;
-                stickerDrag.getLayoutParams().width = size;
+            int drawableId = stickerElement.drawableIds.get(index);
+
+            if (stickerElement.draggable) {
+                stickerDrag.setImageResource(drawableId);
+
+                //
+                if (stickerElement.slot < 2) {
+                    int size = (int) getResources().getDimension(R.dimen.stickers_size);
+                    stickerDrag.getLayoutParams().height = size;
+                    stickerDrag.getLayoutParams().width = size;
+                } else {
+                    ViewGroup.LayoutParams params = stickerDrag.getLayoutParams();
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    stickerDrag.setLayoutParams(params);
+                }
+
+                draggableElement = stickerElement;
             } else {
-                ViewGroup.LayoutParams params = stickerDrag.getLayoutParams();
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-                stickerDrag.setLayoutParams(params);
+                stickerFrame.setImageResource(drawableId);
+                frameElement = stickerElement;
             }
-            
-            draggableElement = stickerElement;
-        } else {
-            stickerFrame.setImageResource(drawableId);
-            frameElement = stickerElement;
+
         }
     }
 
@@ -313,7 +335,6 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         } catch (Throwable e) {
             e.printStackTrace();
         }
-
 
 
     }
