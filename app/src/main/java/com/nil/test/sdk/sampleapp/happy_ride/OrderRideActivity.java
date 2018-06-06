@@ -160,23 +160,23 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         switch (index) {
             case 0:
-                title = "For which show do you order HappyRide?";
+                title = "For which show would you like to order a HappyRide?";
                 break;
 
             case 1:
-                title = "On what date you want to go?";
+                title = "On what date do you want to go?";
                 break;
 
             case 2:
-                title = "From where to pick you up?";
+                title = "From where would you like to be picked up?";
                 break;
 
             case 3:
-                title = "What time should the taxi wait for you?";
+                title = "At what time should the taxi wait for you?";
                 break;
 
             case 4:
-                title = "Who is coming with you?";
+                title = "How many would you be?";
                 break;
 
             default:
