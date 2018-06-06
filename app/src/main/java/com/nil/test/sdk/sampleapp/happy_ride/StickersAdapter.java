@@ -10,18 +10,19 @@ import android.widget.ImageView;
 import com.nil.test.sdk.sampleapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by itanbp on 06/06/2018.
  */
 public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHolder> {
 
-    private ArrayList<Integer> stickerIcons;
+    private ArrayList<StickerElement> stickerIcons;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
 
-    StickersAdapter(Context context, ArrayList<Integer> stickerIcons) {
+    StickersAdapter(Context context, ArrayList<StickerElement> stickerIcons) {
         this.mInflater = LayoutInflater.from(context);
         this.stickerIcons = stickerIcons;
     }
@@ -35,7 +36,7 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        int drawableId = stickerIcons.get(position);
+        int drawableId = stickerIcons.get(position).drawableIds.get(0);
         holder.stickerIcon.setImageResource(drawableId);
     }
 
@@ -58,7 +59,10 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null) {
+                int position = getAdapterPosition();
+                mClickListener.onItemClick(view, stickerIcons.get(position));
+            };
         }
     }
 
@@ -69,7 +73,29 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
 
 
     public interface ItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, StickerElement stickerElement);
+    }
+
+
+    public static class StickerElement {
+
+        List<Integer> drawableIds;
+        boolean dragable; // dragable or frame
+        int index;
+
+        /*
+        public StickerElement(int drawableId, boolean dragable) {
+            ArrayList<Integer> drawableIds = new ArrayList<>();
+            drawableIds.add(drawableId);
+            this(drawableIds, dragable);
+        }
+        */
+
+        public StickerElement(List<Integer> drawableIds, boolean dragable) {
+            this.drawableIds = drawableIds;
+            this.dragable = dragable;
+            index = 0;
+        }
     }
 
 }

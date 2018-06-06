@@ -1,13 +1,12 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-
+import com.nil.test.sdk.sampleapp.happy_ride.StickersAdapter.StickerElement;
 import com.nil.test.sdk.sampleapp.R;
 
 import java.util.ArrayList;
@@ -22,6 +21,9 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
     private ImageView screenshotBackground;
     private RecyclerView stickersRecycler;
     private StickersAdapter stickersAdapter;
+    private ImageView stickerFrame;
+    private ImageView stickerDrag;
+
 
 
     @Override
@@ -29,6 +31,8 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         super.onCreate(savedInstanceState);
 
         stickersRecycler = findViewById(R.id.stickers_gallery);
+        stickerFrame = findViewById(R.id.sticker_frame);
+        stickerDrag = findViewById(R.id.sticker_drag);
 
         screenshotBackground = findViewById(R.id.sticker_screenshot_background);
         screenshotBitmap = HappyRideData.getInstance().getBitmap();
@@ -69,19 +73,46 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View view, StickerElement stickerElement) {
+
+        if (stickerElement == null) {
+            return;
+        }
+
+        int index = stickerElement.index;
+        int drawableId = stickerElement.drawableIds.get(index);
+
+        if (stickerElement.dragable) {
+            stickerDrag.setImageResource(drawableId);
+        } else {
+            stickerFrame.setImageResource(drawableId);
+        }
     }
 
 
-    private ArrayList<Integer> getStickersMock() {
+    private ArrayList<StickerElement> getStickersMock() {
 
-        ArrayList<Integer> stickers = new ArrayList<>();
+        ArrayList<StickerElement> stickers = new ArrayList<>();
+        ArrayList<Integer> drawableIds = new ArrayList<>();
 
-        stickers.add(R.drawable.logo);
-        stickers.add(R.drawable.pic_ed);
-        stickers.add(R.drawable.logo);
-        stickers.add(R.drawable.logo);
-        stickers.add(R.drawable.logo);
+        drawableIds.add(R.drawable.logo);
+        stickers.add(new StickerElement(drawableIds, false));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.pic_ed);
+        stickers.add(new StickerElement(drawableIds, false));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.logo);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.ic_launcher);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.ic_tickets);
+        stickers.add(new StickerElement(drawableIds, true));
 
         return stickers;
     }
