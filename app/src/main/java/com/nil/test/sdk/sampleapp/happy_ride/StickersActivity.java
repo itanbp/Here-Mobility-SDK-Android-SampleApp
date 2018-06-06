@@ -51,6 +51,8 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
 
     private String bitmapPath;
+    private StickerElement draggableElement;
+    private StickerElement frameElement;
 
 
     @Override
@@ -68,6 +70,9 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         bottomSheetContainer = findViewById(R.id.stickers_bottom_sheet);
         saveButton = findViewById(R.id.stickers_save_button);
 
+        draggableElement = null;
+        frameElement = null;
+
         stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag, new OnDragTouchListener.OnDragActionListener() {
             @Override
             public void onDragStart(View view) {
@@ -81,7 +86,14 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
             @Override
             public void onClick() {
-
+                /*
+                if (draggableElement != null) {
+                    draggableElement.index++;
+                    if (draggableElement.hasNext()) {
+                        stickerDrag.setImageResource(draggableElement.drawableIds.get(draggableElement.index));
+                    }
+                }
+                */
             }
         }));
 
@@ -96,7 +108,16 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
 
         stickerFrame.setOnClickListener(v -> {
-
+            /*
+            if (frameElement != null) {
+                if (frameElement != null) {
+                    frameElement.index++;
+                    if (frameElement.hasNext()) {
+                        stickerDrag.setImageResource(frameElement.drawableIds.get(frameElement.index));
+                    }
+                }
+            }
+            */
         });
 
 
@@ -145,6 +166,8 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
         if (stickerElement.draggable) {
             stickerDrag.setImageResource(drawableId);
+
+            //
             if (stickerElement.slot < 2) {
                 int size = (int) getResources().getDimension(R.dimen.stickers_size);
                 stickerDrag.getLayoutParams().height = size;
@@ -155,8 +178,11 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 stickerDrag.setLayoutParams(params);
             }
+            
+            draggableElement = stickerElement;
         } else {
             stickerFrame.setImageResource(drawableId);
+            frameElement = stickerElement;
         }
     }
 
