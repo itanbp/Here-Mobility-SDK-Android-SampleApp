@@ -87,7 +87,8 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         screenshotBackground = findViewById(R.id.sticker_screenshot_background);
 
 
-        stickersRecycler.setLayoutManager(new GridLayoutManager(this, 3));
+        stickersRecycler.setLayoutManager(new CustomGridLayoutManager(this, 3));
+        stickersRecycler.setNestedScrollingEnabled(false);
         stickersAdapter = new StickersAdapter(this, getStickersMock());
         stickersAdapter.setClickListener(this);
         stickersRecycler.setAdapter(stickersAdapter);
