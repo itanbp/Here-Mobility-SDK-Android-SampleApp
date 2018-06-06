@@ -154,23 +154,62 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         ArrayList<StickerElement> stickers = new ArrayList<>();
         ArrayList<Integer> drawableIds = new ArrayList<>();
 
-        drawableIds.add(R.drawable.logo);
-        stickers.add(new StickerElement(drawableIds, false));
+        drawableIds.add(R.drawable.stickers_20);
+        drawableIds.add(R.drawable.stickers_25);
+        drawableIds.add(R.drawable.stickers_26);
+        drawableIds.add(R.drawable.stickers_27);
+        drawableIds.add(R.drawable.stickers_28);
+        stickers.add(new StickerElement(drawableIds, true));
+
 
         drawableIds = new ArrayList<>();
-        drawableIds.add(R.drawable.pic_ed);
-        stickers.add(new StickerElement(drawableIds, false));
+        drawableIds.add(R.drawable.stickers_19);
+        drawableIds.add(R.drawable.stickers_05);
+        drawableIds.add(R.drawable.stickers_06);
+        drawableIds.add(R.drawable.stickers_07);
+        drawableIds.add(R.drawable.stickers_08);
+        stickers.add(new StickerElement(drawableIds, true));
+
 
         drawableIds = new ArrayList<>();
-        drawableIds.add(R.drawable.logo);
+        drawableIds.add(R.drawable.stickers_23);
+        drawableIds.add(R.drawable.stickers_1);
+        drawableIds.add(R.drawable.stickers_2);
+        drawableIds.add(R.drawable.stickers_3);
+        drawableIds.add(R.drawable.stickers_4);
+        stickers.add(new StickerElement(drawableIds, false));
+
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_17);
         stickers.add(new StickerElement(drawableIds, true));
 
         drawableIds = new ArrayList<>();
-        drawableIds.add(R.drawable.ic_launcher);
+        drawableIds.add(R.drawable.stickers_15);
         stickers.add(new StickerElement(drawableIds, true));
 
         drawableIds = new ArrayList<>();
-        drawableIds.add(R.drawable.ic_tickets);
+        drawableIds.add(R.drawable.stickers_16);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_21);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_22);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_10);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_11);
+        stickers.add(new StickerElement(drawableIds, true));
+
+        drawableIds = new ArrayList<>();
+        drawableIds.add(R.drawable.stickers_13);
         stickers.add(new StickerElement(drawableIds, true));
 
         return stickers;
