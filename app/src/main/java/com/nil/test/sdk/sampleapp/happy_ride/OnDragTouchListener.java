@@ -158,12 +158,21 @@ public class OnDragTouchListener implements View.OnTouchListener {
             } else {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+
+                        /*
+                        if (v.getX() - event.getRawX() < 10 && v.getY() - event.getRawY() < 10) {
+                            return true;
+                        }
+                        */
+
                         isDragging = true;
                         if (!isInitialized) {
                             updateBounds();
                         }
+
                         dX = v.getX() - event.getRawX();
                         dY = v.getY() - event.getRawY();
+
                         if (mOnDragActionListener != null) {
                             mOnDragActionListener.onDragStart(mView);
                         }

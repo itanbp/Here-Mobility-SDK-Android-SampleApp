@@ -80,21 +80,21 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
     public static class StickerElement {
 
         List<Integer> drawableIds;
-        boolean dragable; // dragable or frame
+        boolean draggable; // draggable or frame
         int index;
+        private boolean hasNext;
+        int slot;
 
-        /*
-        public StickerElement(int drawableId, boolean dragable) {
-            ArrayList<Integer> drawableIds = new ArrayList<>();
-            drawableIds.add(drawableId);
-            this(drawableIds, dragable);
-        }
-        */
 
-        public StickerElement(List<Integer> drawableIds, boolean dragable) {
+        public StickerElement(List<Integer> drawableIds, boolean draggable, int slot) {
             this.drawableIds = drawableIds;
-            this.dragable = dragable;
+            this.draggable = draggable;
+            this.slot = slot;
             index = 0;
+        }
+
+        public boolean hasNext() {
+            return index < drawableIds.size() -1;
         }
     }
 

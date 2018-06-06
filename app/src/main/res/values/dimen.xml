@@ -16,5 +16,6 @@
     <dimen name="views_margin_very_small">4dp</dimen>
     <dimen name="views_margin_card">12dp</dimen>
 
+    <dimen name="stickers_size">250dp</dimen>
 
 </resources>
