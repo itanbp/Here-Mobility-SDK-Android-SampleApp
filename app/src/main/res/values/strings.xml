@@ -68,5 +68,6 @@
     <string name="external_permission">ARView needs access to external storage.</string>
 
     <string name="stickers_save">save</string>
+    <string name="title_activity_concert">ConcertActivity</string>
 
 </resources>

@@ -43,17 +43,20 @@
         <activity android:name=".happy_ride.HomeActivity" />
         <activity android:name=".happy_ride.MarketplaceActivity" />
         <activity android:name=".happy_ride.OrderRideActivity" />
-        <activity android:name=".happy_ride.SplashActivity">
-        </activity>
+        <activity android:name=".happy_ride.SplashActivity"></activity>
         <activity android:name=".happy_ride.OrderConfirmationActivity" />
-        <activity android:name=".happy_ride.CameraActivity" >
+        <activity android:name=".happy_ride.CameraActivity">
+        </activity>
+        <activity android:name=".happy_ride.StickersActivity" />
+        <activity
+            android:name=".happy_ride.ConcertActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".happy_ride.StickersActivity"/>
     </application>
 
 </manifest>

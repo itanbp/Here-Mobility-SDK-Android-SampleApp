@@ -173,4 +173,8 @@
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="HappyRideTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="HappyRideTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
