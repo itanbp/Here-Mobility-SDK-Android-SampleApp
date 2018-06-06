@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="100dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:background="#80ffffff">
+
+
+    <Button
+        android:id="@+id/stickers_button"
+        android:layout_width="64dp"
+        android:layout_height="16dp"
+        style="@style/LargeButtonPurple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/views_margin_small"
+        android:visibility="gone"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stickers_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stickers_button"
+        android:layout_marginTop="@dimen/views_margin_small"
+        android:padding="@dimen/views_margin_small"/>
+
+
+</android.support.constraint.ConstraintLayout>

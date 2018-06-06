@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stickers_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nil.test.sdk.sampleapp.happy_ride.StickersActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:background="@android:color/transparent"/>
+
+
+    <ImageView
+        android:id="@+id/sticker_screenshot_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <ImageView
+        android:id="@+id/sticker_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <ImageView
+        android:id="@+id/sticker_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+
+    <include
+        android:id="@+id/stickers_bottom_sheet"
+        layout="@layout/stickers_bottom_sheet"/>
+
+
+</android.support.design.widget.CoordinatorLayout>

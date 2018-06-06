@@ -508,7 +508,7 @@ public class OrderRideActivity extends BaseActivity implements IStepperAdapter {
 
         @Override
         public void onError(@NonNull ResponseException exception) {
-
+            int a = 5;
         }
     };
 

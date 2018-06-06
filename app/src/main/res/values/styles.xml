@@ -125,6 +125,11 @@
         <item name="android:colorButtonNormal">@color/material_grey_500</item>
     </style>
 
+
+    <style name="LargeButtonWhite" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/white</item>
+    </style>
+
     <style name="ButtonsBigCenterWhite">
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textSize">20sp</item>

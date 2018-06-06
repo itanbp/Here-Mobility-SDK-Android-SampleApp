@@ -64,5 +64,7 @@
     <string name="confirmation_order_number">Order #%1$s</string>
     <string name="confirmation_calender">Add To Calendar</string>
 
+    <string name="camera_permission">ARView needs access to camera.</string>
+    <string name="external_permission">ARView needs access to external storage.</string>
 
 </resources>
