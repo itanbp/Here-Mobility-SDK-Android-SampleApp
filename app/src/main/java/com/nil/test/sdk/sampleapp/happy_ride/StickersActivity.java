@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.nil.test.sdk.sampleapp.happy_ride.StickersAdapter.StickerElement;
@@ -37,7 +38,22 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickerDrag = findViewById(R.id.sticker_drag);
         stickersContainer = findViewById(R.id.stickers_container);
 
-        stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag));
+        stickerDrag.setOnTouchListener(new OnDragTouchListener(stickerDrag, new OnDragTouchListener.OnDragActionListener() {
+            @Override
+            public void onDragStart(View view) {
+
+            }
+
+            @Override
+            public void onDragEnd(View view) {
+
+            }
+
+            @Override
+            public void onClick() {
+                Log.v("MOTEK", "stickerDrag");
+            }
+        }));
 
         screenshotBackground = findViewById(R.id.sticker_screenshot_background);
         screenshotBitmap = HappyRideData.getInstance().getBitmap();
@@ -48,6 +64,11 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         stickersAdapter = new StickersAdapter(this, getStickersMock());
         stickersAdapter.setClickListener(this);
         stickersRecycler.setAdapter(stickersAdapter);
+
+
+        stickerFrame.setOnClickListener(v -> {
+            Log.v("MOTEK", "stickerFrame");
+        });
 
 
     }
