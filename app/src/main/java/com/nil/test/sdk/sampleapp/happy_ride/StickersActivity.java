@@ -139,10 +139,10 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
             return;
         }
 
-        int index = stickerElement.index;
+        int index = stickerElement.index + (stickerElement.hasNext() ? 1 : 0);
         int drawableId = stickerElement.drawableIds.get(index);
 
-        if (stickerElement.dragable) {
+        if (stickerElement.draggable) {
             stickerDrag.setImageResource(drawableId);
         } else {
             stickerFrame.setImageResource(drawableId);
