@@ -25,7 +25,7 @@
         android:id="@+id/confirmation_camera_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/stickers_25"
+        android:src="@drawable/pic_confrimaton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
