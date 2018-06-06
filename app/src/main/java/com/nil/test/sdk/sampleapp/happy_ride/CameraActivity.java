@@ -5,8 +5,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Surface;
@@ -20,8 +25,12 @@ import android.widget.Toast;
 
 import com.nil.test.sdk.sampleapp.R;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import ai.deepar.ar.AREventListener;
@@ -164,7 +173,7 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
         String externalStoragePermission = getResources().getString(R.string.external_permission);
 
         checkMultiplePermissions(
-                Arrays.asList(Manifest.permission.CAMERA),
+                Arrays.asList(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 cameraPermission + " " + externalStoragePermission,
                 100,
                 new PermissionsActivity.MultiplePermissionsCallback() {
@@ -265,10 +274,13 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
     @Override
     public void screenshotTaken(final Bitmap screenshot) {
         if (screenshot != null) {
+            /*
             Intent intent = new Intent(this, StickersActivity.class);
             HappyRideData.getInstance().setBitmap(screenshot);
-            //intent.putExtra(BITMAP_KEY, screenshot);
             startActivity(intent);
+            */
+
+            shareBitmap(screenshot);
         }
     }
 
@@ -315,6 +327,49 @@ public class CameraActivity extends PermissionsActivity implements AREventListen
 
     @Override
     public void error(String error) {
+    }
+
+
+    private void shareBitmap(Bitmap bitmap) {
+
+        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+
+        if (intent != null) {
+
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setPackage("com.instagram.android");
+
+
+            CharSequence now = DateFormat.format("yyyy_MM_dd_hh_mm_ss", new Date());
+
+            try {
+
+                File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/DeepAR_" + now + ".jpg");
+                FileOutputStream outputStream = new FileOutputStream(imageFile);
+
+                int quality = 100;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+
+                outputStream.flush();
+                outputStream.close();
+
+                MediaScannerConnection.scanFile(CameraActivity.this, new String[]{imageFile.toString()}, null, null);
+
+                try {
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), imageFile.getPath(), "GO Mobility", "MoBiLiTy")));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                shareIntent.setType("image/jpeg");
+                startActivity(shareIntent);
+
+
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
