@@ -1,15 +1,21 @@
 package com.nil.test.sdk.sampleapp.happy_ride;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.view.View;
@@ -20,7 +26,9 @@ import com.nil.test.sdk.sampleapp.R;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class StickersActivity extends BaseActivity implements StickersAdapter.ItemClickListener {
 
@@ -80,7 +88,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
 
         stickerFrame.setOnClickListener(v -> {
-            Log.v("MOTEK", "stickerFrame");
+            shareBitmap();
         });
 
         setBackgroundImage();
@@ -174,28 +182,78 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
         }
     }
 
-    private void shareBitmap(String bitmapPath) {
+    private void shareBitmap() {
 
-        Intent intent = getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+        if (TextUtils.isEmpty(bitmapPath)) {
+            return;
+        }
 
-        if (intent != null) {
+        /*
+        Bitmap bitmap = Bitmap.createBitmap(stickersContainer.getWidth(), stickersContainer.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        stickersContainer.draw(canvas);
+        */
 
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setPackage("com.instagram.android");
+        Bitmap bitmap = takeScreenShot(this);
 
+        CharSequence now = DateFormat.format("yyyy_MM_dd_hh_mm_ss", new Date());
 
-            try {
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmapPath, "GO Mobility", "MoBiLiTy")));
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+        try {
+
+            File imageFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/DeepAR_" + now + ".jpg");
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+
+            outputStream.flush();
+            outputStream.close();
+
+            MediaScannerConnection.scanFile(StickersActivity.this, new String[]{imageFile.toString()}, null, null);
+            Intent intent = getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+
+            if (intent != null) {
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.setPackage("com.instagram.android");
+
+                try {
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmapPath, "GO Mobility", "MoBiLiTy")));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                shareIntent.setType("image/jpeg");
+                startActivity(shareIntent);
             }
 
-            shareIntent.setType("image/jpeg");
-            startActivity(shareIntent);
-
-
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
+
+
+
+    }
+
+
+    private Bitmap takeScreenShot(Activity activity) {
+
+        View view = activity.getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap b1 = view.getDrawingCache();
+        Rect frame = new Rect();
+        activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+
+        //Find the screen dimensions to create bitmap in the same size.
+        int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+        int height = activity.getWindowManager().getDefaultDisplay().getHeight();
+
+        Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height - statusBarHeight);
+        view.destroyDrawingCache();
+        return b;
     }
 
 
