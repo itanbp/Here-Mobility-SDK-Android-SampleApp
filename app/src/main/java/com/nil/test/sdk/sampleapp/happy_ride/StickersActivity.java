@@ -110,15 +110,15 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
         advanceButton.setOnClickListener(v -> {
             if (draggableElement != null) {
-                draggableElement.index++;
-                if (draggableElement.hasNext()) {
+                draggableElement.setNext();
+                if (draggableElement.index < draggableElement.drawableIds.size()) {
                     stickerDrag.setImageResource(draggableElement.drawableIds.get(draggableElement.index));
                 }
             }
             if (frameElement != null) {
                 if (frameElement != null) {
-                    frameElement.index++;
-                    if (frameElement.hasNext()) {
+                    frameElement.setNext();
+                    if (frameElement.index < frameElement.drawableIds.size()) {
                         stickerFrame.setImageResource(frameElement.drawableIds.get(frameElement.index));
                     }
                 }
@@ -179,7 +179,9 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
             return;
         }
 
-        int index = stickerElement.index + (stickerElement.hasNext() ? 1 : 0);
+        stickerElement.init();
+
+        int index = stickerElement.index;
 
         if (index < stickerElement.drawableIds.size()) {
 
