@@ -114,11 +114,12 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
                 if (draggableElement.hasNext()) {
                     stickerDrag.setImageResource(draggableElement.drawableIds.get(draggableElement.index));
                 }
-            } else if (frameElement != null) {
+            }
+            if (frameElement != null) {
                 if (frameElement != null) {
                     frameElement.index++;
                     if (frameElement.hasNext()) {
-                        stickerDrag.setImageResource(frameElement.drawableIds.get(frameElement.index));
+                        stickerFrame.setImageResource(frameElement.drawableIds.get(frameElement.index));
                     }
                 }
             }
@@ -196,6 +197,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
                     ViewGroup.LayoutParams params = stickerDrag.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    stickerDrag.setLayoutParams(params);
                     stickerDrag.setLayoutParams(params);
                 }
 
