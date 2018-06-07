@@ -110,15 +110,16 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
 
         advanceButton.setOnClickListener(v -> {
             if (draggableElement != null) {
-                draggableElement.index++;
-                if (draggableElement.hasNext()) {
+                draggableElement.setNext();
+                if (draggableElement.index < draggableElement.drawableIds.size()) {
                     stickerDrag.setImageResource(draggableElement.drawableIds.get(draggableElement.index));
                 }
-            } else if (frameElement != null) {
+            }
+            if (frameElement != null) {
                 if (frameElement != null) {
-                    frameElement.index++;
-                    if (frameElement.hasNext()) {
-                        stickerDrag.setImageResource(frameElement.drawableIds.get(frameElement.index));
+                    frameElement.setNext();
+                    if (frameElement.index < frameElement.drawableIds.size()) {
+                        stickerFrame.setImageResource(frameElement.drawableIds.get(frameElement.index));
                     }
                 }
             }
@@ -178,7 +179,9 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
             return;
         }
 
-        int index = stickerElement.index + (stickerElement.hasNext() ? 1 : 0);
+        stickerElement.init();
+
+        int index = stickerElement.index;
 
         if (index < stickerElement.drawableIds.size()) {
 
@@ -196,6 +199,7 @@ public class StickersActivity extends BaseActivity implements StickersAdapter.It
                     ViewGroup.LayoutParams params = stickerDrag.getLayoutParams();
                     params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                     params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    stickerDrag.setLayoutParams(params);
                     stickerDrag.setLayoutParams(params);
                 }
 

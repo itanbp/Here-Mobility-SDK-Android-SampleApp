@@ -93,9 +93,25 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.ViewHo
             index = 0;
         }
 
-        public boolean hasNext() {
+
+        private boolean hasNext() {
             return index < drawableIds.size() -1;
         }
+
+        public void init() {
+            index = drawableIds.size() > 1 ? 1 : 0;
+        }
+
+
+        public void setNext() {
+            if (index > 0) {
+                index = (index + 1) % drawableIds.size();
+                if (index == 0) {
+                    init();
+                }
+            }
+        }
+
     }
 
 }
